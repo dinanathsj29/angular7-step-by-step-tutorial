@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="_images_angular6/angular_logo_1.png" alt="angular logo" title="angular logo" width="200" />
+    <img src="_images_angular7/angular_logo_1.png" alt="angular logo" title="angular logo" width="200" />
 </p>
 
 Angular 2/4/5/6/7
