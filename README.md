@@ -16,6 +16,7 @@ Topics include
 ===================== 
 1. [Angular7 Introduction](#01-angular7-introduction)
 2. [Getting Started](#02-getting-started)
+3. [Angular First Hello World App](#03-angular-first-hello-world-app)
 
 01 Angular7 Introduction
 =====================
@@ -127,14 +128,56 @@ In this section, we will learn how to set up a local development environment to 
 </p>
 
 4. After installation check version of angular CLI by using the command: `ng -v` OR `ng --version`
-5. Create a new app with angular CLI by using syntax: `ng new project/appName` example: command: `ng new angular-demo-app`
-6. Go inside the project/app directory, command: `cd angular-demo-app`
+5. Create a new app with angular CLI by using syntax: `ng new project/appName` example: command: `ng new angular6-1-demo`
+6. Go inside the project/app directory, command: `cd angular6-1-demo`
 7. Build and run Angular App, command: `ng serve` OR `ng serve -o` OR `ng serve --open`
-8. Go to the browser and launch Angular App by entering the web address: `localhost:4200`
+8. Go to the browser and launch/check Angular App by entering the web address: `localhost:4200`
 
 2.4. Commonly / widely used node/npm commands:
 ---------------------
 - to get Node version, type command: `node -v`  OR `node --version`
 - to get NPM version, type command: `npm -v`  OR `npm --version`
 - to install Angular CLI, type command: `npm install -g @angular/cli`
-- to get angular CLI version, type command: `ng -v` OR `ng --version` (this command displays details of node, npm, and other angular package versions)
+- to get angular CLI version, type command: `ng -v` OR `ng --version` (this command displays details of a node, npm, and other angular package versions)
+
+03 Angular First Hello World App
+=====================
+- If using Visual Studio Code / Insiders, open Command panel/terminal from menu: View -> Terminal (shortcut key is `CTRL + BackTick` OR `COMMAND + J`)
+- To create a new app with angular CLI by using syntax: `ng new project/appName` example: command: `ng new angular6-1-demo`
+- Go inside the project/app directory, command: `cd angular6-1-demo OR cd appName`
+- To Build and run Angular App, command: `ng serve / npm start` OR `ng serve -o` OR `ng serve --open`
+- To change port from 4200 to other port - type command:  `ng serve --port 5000`
+- To check the application in browser type path/url: `localhost:4200 / 5000`
+
+3.1. Angular application Architecture summary:
+---------------------
+- `Angular app`: (Show graphical representation of `src -> app -> components` folder)
+    - Angular apps are modular in nature 
+    - Consists of one or more modules (Angular App is a collection of one or many module)
+    - Modules are main feature area - User module, Admin module, Dashboard module, Employee module)
+    - `Angular Application Root Module is AppModule (app.module.ts) ` 
+    - `Modules` are lines of code which can be IMPORTed or EXPORTed
+        - Module consists of one or more Components and Services 
+        - `Components` - .HTML Template + .ts Class + .CSS 
+            - A component represents/controls view in the browser
+            - (example: header, footer, sidebar, common panels, common search utility, similar feature components used throughout the application)
+            - `Angular Application Root component is AppComponent (app.comoponent.ts)`
+        - `Services` - Class which consists Business logic (common programming feature used throughout the application)
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/3.3.1_application_architecture.png" alt="Angular Application Folder Architecture" title="Angular Application Folder Architecture" width="400" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Angular Application Folder Architecture</figcaption>
+  </figure>
+</p>
+
+Modules interact and ultimately render Components+Services view in the browser.
+
+3.2. Angular application File / Folder Architecture summary:
+---------------------
+- `package.json`: consists of Node/NPM library/package/module dependencies for application development
+- `node_modues` - folder consists of all installed packages
+- `src/main.ts` - entry point to angular application. src/index.html
+- `app/app.module.ts` - route module of application
+- `app/app.component.ts` - route component of application
+- `ng serve / npm start` -> main.ts (index.html) -> app.module.ts -> app.component.ts -> (app.component.html + css)
