@@ -166,7 +166,7 @@ In this section, we will learn how to set up a local development environment to 
 
 <p>
   <figure>
-    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/3.3.1_application_architecture.png" alt="Angular Application Folder Architecture" title="Angular Application Folder Architecture" width="400" border="2" />
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/3.1_application_architecture.png" alt="Angular Application Folder Architecture" title="Angular Application Folder Architecture" width="400" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Angular Application Folder Architecture</figcaption>
   </figure>
 </p>
