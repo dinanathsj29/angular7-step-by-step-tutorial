@@ -17,6 +17,7 @@ Topics include
 1. [Angular7 Introduction](#01-angular7-introduction)
 2. [Getting Started](#02-getting-started)
 3. [Angular First Hello World App](#03-angular-first-hello-world-app)
+4. [Components](#04-components)
 
 01 Angular7 Introduction
 =====================
@@ -153,7 +154,7 @@ In this section, we will learn how to set up a local development environment to 
 ---------------------
 - `Angular app`: (Show graphical representation of `src -> app -> components` folder)
     - Angular apps are modular in nature 
-    - Consists of one or more modules (Angular App is a collection of one or many module)
+    - Consists of one or more modules (Angular App is a collection of one or many modules)
     - Modules are main feature area - User module, Admin module, Dashboard module, Employee module)
     - `Angular Application Root Module is AppModule (app.module.ts) ` 
     - `Modules` are lines of code which can be IMPORTed or EXPORTed
@@ -161,8 +162,8 @@ In this section, we will learn how to set up a local development environment to 
         - `Components` - .HTML Template + .ts Class + .CSS 
             - A component represents/controls view in the browser
             - (example: header, footer, sidebar, common panels, common search utility, similar feature components used throughout the application)
-            - `Angular Application Root component is AppComponent (app.comoponent.ts)`
-        - `Services` - Class which consists Business logic (common programming feature used throughout the application)
+            - `Angular Application Root (bootstrapped) component is AppComponent (app.comoponent.ts)`
+        - `Services` - Class which consists of Business logic (common programming feature used throughout the application)
 
 <p>
   <figure>
@@ -181,3 +182,365 @@ Modules interact and ultimately render Components+Services view in the browser.
 - `app/app.module.ts` - route module of application
 - `app/app.component.ts` - route component of application
 - `ng serve / npm start` -> main.ts (index.html) -> app.module.ts -> app.component.ts -> (app.component.html + css)
+
+04 Components
+=====================
+- The core/key idea behind Angular is to build application using `reusable parts/chunks i.e. components`
+- Components are main building blocks of UI and an/any angular application. (Show graphical representation)
+- `Angular Application Root (bootstrapped) component is AppComponent (app.comoponent.ts)`
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/4_components.png" alt="Angular Components " title="Angular Components" width="400" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Angular Components</figcaption>
+  </figure>
+</p>
+
+A component is self contained, reusable piece of UI made up of 3 important parts:
+1. `Template` - `View, HTML code` (User Interface for application also known as view)
+2. `Class` - `Business logic/Application logic` for the view, `TypeScript/JavaScript code`, (Data, Methods & properties)
+3. `Decorator/Metadata` - `Metadata, a @function` which provide more information for angular class. example: app.component.ts: 
+
+> **Syntax & Example**: app.component.ts
+```typescript
+@Component({
+    selector: 'app-root', // selector - a custom html tag
+    templateUrl: './app.component.html', // template/templateUrl - html view,
+    styleUrls: ['./app.component.css'] // styleUrls - css style sheet
+})
+```
+
+4.1. Creating component:
+---------------------
+- We can create component manually, but in that scenario, we need to do and follow various steps/manual entries
+- It's advisable to use angular CLI to create a component, services, routing, etc. 
+`To create a component using angular CLI`:
+    - `syntax`: ng generate component componentName OR ng generate component path/componentName
+    - `command`: ng generate component components/component-demo1 OR ng g c components/component-demo1
+    - **`It generates 4 new files: .css-styles, .html-markup, .spec.ts-test, .ts-class`**
+    - Also, an automated `import` /update/entry of components is done in `app.module.ts` file at the top `imports section` and in `declarations array` which consists of all the components used in the application
+    - A component must be a member of/belongs to an `@NgModule - declarations array` in order for it to be usable by another component or application
+    - To use current component in application, copy and paste new component `'selector'` from .ts file i.e. `'app-component-demo1'` as a tag in `app.component.html `
+
+4.2. @Component/Decorator/Metadata details:
+---------------------
+### 4.2.1. selector:
+- Selector is basically a `custom HTML tag used to represent current component`
+- Selector helps to `render .html file/html template` in browser
+- Example: index.html: `<app-root></app-root>`
+- Example: app.component.html: `<app-component-demo1><app-component-demo1>`
+- There are total 3 ways to specify/write and use selectors:
+
+> **Syntax & Example**: component-demo1.component.ts
+```
+    1. tag: < > selector: 'app-test', example: <app-test>
+    2. class: . selector: '.app-test', example: <div class="app-test">
+    3. attribute / [ ]: selector: '[app-test]', example: <div app-test>
+```
+
+### 4.2.2. template:
+- `template` property denotes writing html markup in current class .ts file only
+- `template` property can help to write all html/markup in .ts typescript file itself
+- single line can be written directly:
+
+> **Syntax & Example**:
+```typescript
+template: '<h1>Inline single template Heading used - template written in same .ts file</h1>',
+```
+
+- multi line html can be written with back-tick ` ` symbol: 
+> **Syntax & Example**:
+```typescript
+template: `
+    <h1> Multiple line template </h1>
+    <div> template written in same .ts file </div>
+`,
+```
+### 4.2.3. templateUrl:
+- `templateUrl` denotes/points to an `external .html` file OR 
+- Write html code in another .html file and call the file path with `templateUrl` property (separation of concern)
+
+> **Syntax & Example**: 
+```typescript
+templateUrl: './app.component.html', // template/templateUrl - html view,
+```
+
+> **Syntax & Example**: component-demo2-template.component.ts
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo2-template',
+  templateUrl: './component-demo2-template.component.html',
+
+  // single line template
+  // template: '<h1>Inline single template para used </h1>',
+
+  // multi line template
+  template:`
+    <h1>component-demo2-template templateUrl works!</h1>
+
+    <h2>template</h2>
+    template denotes writing html markup in current class file only, template property can help to write all html/markup in .ts typescript file itself.
+  
+    <p> Multiple line template </p>
+    <div> template written in same .ts file </div>
+    `,
+  styleUrls: ['./component-demo2-template.component.css']
+})
+export class ComponentDemo2TemplateComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+### 4.2.4. styles:  
+- style denotes writing `css style for current component only` - like inline css, 
+- multiple css styles written inside array [ ] and back tick ` ` symbol
+
+> **Syntax & Example**: 
+```typescript
+styles: [`
+    h1 {
+        text-align:center;
+    }
+
+    div {
+        border:2px dashed gray;
+    }
+`]
+```
+
+### 4.2.5. styleUrls:
+- `styleUrls` denotes external css file used for current component
+- write css styles in another .css file and `call the file path with styleUrls` property (seperation of concern)
+
+> **Syntax & Example**: 
+```typescript
+styleUrls: ['./app.component.css'] // styleUrls - css style sheet
+```
+
+> **Syntax & Example**: component-demo3-styles.component.ts
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo3-styles',
+  templateUrl: './component-demo3-styles.component.html',
+  //styleUrls: ['./component-demo3-styles.component.css']
+  styles: [`
+    h1{
+      text-align:center;
+    }
+
+    div{
+      border:2px dashed gray;
+    } 
+  `]
+})
+export class ComponentDemo3StylesComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo1.component.ts
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  // 1. <tag/element> selector
+  selector: 'app-component-demo1',
+  // 2. .class selector
+  // selector: '.app-component-demo1',
+  // 3. [attribute] selector
+  // selector: '[app-component-demo1]',
+  templateUrl: './component-demo1.component.html',
+  styleUrls: ['./component-demo1.component.css']
+})
+export class ComponentDemo1Component implements OnInit {
+  private appName:string = 'Angualr 6 Application';
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo1.component.html
+```html
+<div>
+  <h1>component-demo1 works! </h1>
+  <ul>
+    <li>{{ appName }}</li>
+  </ul>
+
+  <h2>What is Angular</h2>
+  <ul>
+    <li>Framework to build client side application</li>
+    <li>Great for SPAs</li>
+    <li>Angular 2/4/5/6/7 frameworks targets Mobile and Desktop.</li>
+  </ul>
+</div>
+```
+
+> **Syntax & Example**: app.component.html
+```html
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+
+  <!-- There are total 3 ways to specify/write and use selectors: 
+      tag: < >
+      class: .
+      attribute / [ ]
+    -->
+
+  <app-component-demo1></app-component-demo1>
+  <!-- <div class="app-component-demo1"></div> -->
+  <!-- <div app-component-demo1></div> -->
+  <div class="custom-divider"></div>
+</div>
+```
+
+> **Syntax & Example**: app.component.ts
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  // create a property to send from parent to child
+  parentMessage = 'From Parent';
+
+  // 
+  
+}
+```
+
+> **Syntax & Example**: app.module.ts
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { ComponentDemo1Component } from './componenets/component-demo1/component-demo1.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ComponentDemo1Component,
+  ],
+  imports: [
+    BrowserModule,
+  ],
+
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+> **Syntax & Example**: styles.css
+```css
+/* You can add global styles to this file, and also import other style files */
+
+/* common global generic styles */
+.custom-divider {
+  margin: 30px 0px;
+  border-bottom:2px dashed gray;
+}
+
+h1,h2,h3 {
+  text-transform: uppercase;
+  /* text-transform: capitalize; */
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+body {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  letter-spacing: 2px;
+}
+
+li {
+  margin: 10px 0px;
+}
+
+input{
+  padding: 5px;
+}
+
+button {
+  border-radius: 5px;
+  padding: 10px 15px;
+  background-color: teal;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: lightcyan;
+}
+
+/* class binding */
+.text-primary {
+  color: blue;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-success {
+  color: lawngreen;
+}
+
+.text-special {
+  font-weight:bold;
+  font-style: italic;
+  color:orchid;
+}
+
+.text-strikethrough {
+  text-decoration: line-through;
+}
+```
+> **Syntax & Example**: index.html
+```html
+<!doctype html>
+  <html lang="en">
+    
+    <head>
+      <meta charset="utf-8">
+      <title>Angular7Demo</title>
+      <base href="/">
+
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" type="image/x-icon" href="favicon.ico">
+    </head>
+
+    <body>
+      <app-root></app-root>
+    </body>
+
+  </html>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/4.2.1.output-selector-templateUrl-styleUrls.png" alt="Output -  selector, templateUrl, styleUrls" title="Output -  selector, templateUrl, styleUrls" width="600" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output -  selector, templateUrl, styleUrls</figcaption>
+  </figure>
+</p>
