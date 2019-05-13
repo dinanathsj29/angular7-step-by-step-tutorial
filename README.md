@@ -540,7 +540,7 @@ button {
 
 <p>
   <figure>
-    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/4.2.1.output-selector-templateUrl-styleUrls.png" alt="Output -  selector, templateUrl, styleUrls" title="Output -  selector, templateUrl, styleUrls" width="600" border="2" />
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/4.2.1.output-selector-templateUrl-styleUrls.png" alt="Output -  selector, templateUrl, styleUrls" title="Output -  selector, templateUrl, styleUrls" width="800" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output -  selector, templateUrl, styleUrls</figcaption>
   </figure>
 </p>
