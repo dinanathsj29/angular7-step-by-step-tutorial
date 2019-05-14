@@ -544,3 +544,128 @@ button {
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output -  selector, templateUrl, styleUrls</figcaption>
   </figure>
 </p>
+
+05 Interpolation (Data Binding)
+=====================
+- Interpolation denotes/evaluates the content inside `{{ }} braces` and displays the value in component view file
+- Interpolation = expressions, data-binding to text nodes and attribute values
+- interpolation expression = {{ varName }} or {{ fn_anyReturnFunction() }}
+- Angular expressions are much like `JavaScript expressions` and they can contain literals, operators, and variables
+- Data binding in Angular is the `synchronization/communication between the model and the view`
+- `String interpolation` is used to display dynamic data on HTML template (front end / at user end)
+- Variable value assignment not possible with interpolation, Example: `{{ name = 'Dinanath' or Total = 10 + 20 }}`
+
+> **Syntax & Example**: component-demo4-interpolation.component.ts
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo4-interpolation',
+  templateUrl: './component-demo4-interpolation.component.html',
+  styleUrls: ['./component-demo4-interpolation.component.css']
+})
+export class ComponentDemo4InterpolationComponent implements OnInit {
+  // variables - class members
+  public technology = 'Angular 6';
+  public userName = 'Dinanath';
+  // public siteUrl = 'http://www.google.com';
+  public siteUrl = window.location.href;
+
+  fn_showGreetingsToUser() {
+    return 'Welcome ' + this.userName;
+  }
+
+  fn_showMessage() {
+    return 'Welcome to ' + this.technology + ' ' + this.userName;
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo4-interpolation.component.html
+```html
+<div>
+  <h1>component-demo4-interpolation works!</h1>
+  <ul>
+    <li>maths = 2+2 = {{ 2+2 }}</li>
+    <li>{{ "Welcome " + userName }}</li>
+    <li>userName.length = {{ userName.length }}</li>
+    <li>toUpperCase = {{ userName.toUpperCase() }}</li>
+    <li>toLowerCase = {{ userName.toLowerCase() }}</li>
+    <li>current Site URL: {{ siteUrl }}</li>
+    <li>function call: {{ fn_showGreetingsToUser() }}</li>
+    <li>function call: {{ fn_showMessage() }}</li>
+  </ul>
+</div>
+```
+
+> **Syntax & Example**: app.module.ts
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { ComponentDemo1Component } from './componenets/component-demo1/component-demo1.component';
+import { ComponentDemo2TemplateComponent } from './componenets/component-demo2-template/component-demo2-template.component';
+import { ComponentDemo3StylesComponent } from './componenets/component-demo3-styles/component-demo3-styles.component';
+import { ComponentDemo4InterpolationComponent } from './componenets/component-demo4-interpolation/component-demo4-interpolation.component';
+import { ComponentDemo5PropertybindingComponent } from './componenets/component-demo5-propertybinding/component-demo5-propertybinding.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ComponentDemo1Component,
+    ComponentDemo2TemplateComponent,
+    ComponentDemo3StylesComponent,
+    ComponentDemo4InterpolationComponent,
+  ],
+  imports: [
+    BrowserModule,
+  ],
+
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+> **Syntax & Example**: app.component.html
+```html
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+
+  <!-- There are total 3 ways to specify/write and use selectors: 
+      tag: < >
+      class: .
+      attribute / [ ]
+    -->
+
+  <app-component-demo1></app-component-demo1>
+  <!-- <div class="app-component-demo1"></div> -->
+  <!-- <div app-component-demo1></div> -->
+  <div class="custom-divider"></div>
+
+  <!-- component decorator template -->
+  <app-component-demo2-template></app-component-demo2-template>
+  <div class="custom-divider"></div>
+
+  <!-- css style -->
+  <app-component-demo3-styles></app-component-demo3-styles>
+  <div class="custom-divider"></div>
+
+  <!-- interpolation -->
+  <app-component-demo4-interpolation></app-component-demo4-interpolation>
+  <div class="custom-divider"></div>
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/5.interpolation.png" alt="Output - Interpolation {{ }}" title="Output - Interpolation {{ }}" width="800" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Interpolation {{ }}</figcaption>
+  </figure>
+</p>
