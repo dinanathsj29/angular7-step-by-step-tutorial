@@ -18,6 +18,8 @@ Topics include
 2. [Getting Started](#02-getting-started)
 3. [Angular First Hello World App](#03-angular-first-hello-world-app)
 4. [Components](#04-components)
+5. [Interpolation (Data Binding)](#05-interpolation-(data-binding))
+6. [Property Binding](#06-property-binding)
 
 01 Angular7 Introduction
 =====================
@@ -667,5 +669,90 @@ export class AppModule { }
   <figure>
     &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/5.interpolation.png" alt="Output - Interpolation Data Binding {{ }}" title="Output - Interpolation Data Binding {{ }}" width="800" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Interpolation Data Binding {{ }}</figcaption>
+  </figure>
+</p>
+
+06 Property Binding
+=====================
+- String Interpolation and Property binding both are used for the same purpose i.e. one-way Data Binding
+- String Interpolation and Property Binding both `flow value in one direction from our components to HTML elements`
+- Basic Attributes are defined by HTML BUT `"value"` kind of dynamic attributes (properties) which are like properties are defined and managed by DOM
+- `Attributes and properties are NOT the same`<br/>
+    - `Attributes` = HTML &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `Properties` = DOM (Document Object Model)
+- Attributes initialise DOM properties and then they are done - cannot change once they are initialised
+- Property values however can change, HTML attribute value specifies initial value and the `DOM value property is the current value`
+
+> **Syntax & Example**: Property Binding is done with [square bracket] OR bind-properyName:
+
+```html
+example: <input type="text" value="dinanath" />
+```
+
+- type in console:$0.getAttribute("value");   output:"dinanath"  
+- type in console:$0.value;   output:"dinanath" 
+- Now type something new in text field "new Text"
+- type in console:$0.getAttribute("value");   output:"dinanath"  
+- type in console:$0.value;   output:"new Text"
+- > **Note**: Attribute does not changed but `value property changed`
+- `Property Binding done with [ ] square bracket` also with `{{ interpolation }}` But its advisable to use [ ] as its supports string, boolean all property types, boolean value like true/false etc does not works well with {{ interpolation }}
+
+> **Syntax & Example**: component-demo5-propertybinding.component.ts
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo5-propertybinding',
+  templateUrl: './component-demo5-propertybinding.component.html',
+  styleUrls: ['./component-demo5-propertybinding.component.css']
+})
+export class ComponentDemo5PropertybindingComponent implements OnInit {
+  public _id = 'id1';
+  public _isDisabled1 = true;
+  public _isDisabled2 = false;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo5-propertybinding.component.html
+```html
+<div>
+  <h1>component-demo5-propertybinding works!</h1>
+
+  <h3>attributes vs value</h3>
+  <input size="40" type="text" value="angular property binding" />
+
+  <h3 ngNonBindable>property binding [ ] vs interpolation {{ ngNonBindable }} </h3>
+
+  <input type="text" [id]="_id" value="[ ] property-binding" /><br />
+  <input type="text" id="{{_id}}" value="{ } interpolation property-binding" /> <br /> <br />
+
+  <h3>attribute boolean (property) interpolation does not support </h3>
+  <input type="text" disabled="false" [id]="_id" value="boolean false not works" /><br />
+  <input type="text" disabled="true" [id]="_id" value="boolean true not works" /> <br /> <br />
+
+  <h3>property binding boolean values supported  </h3>
+  <input type="text" [disabled]="false" [id]="_id" value="[property-binding] works" /><br />
+  <input type="text" [disabled]="true" [id]="_id" value="[property-binding] works" /><br /> <br />
+
+  <h3>property binding boolean property with variable </h3>
+  <input type="text" [disabled]="_isDisabled1" [id]="_id" value="[ var ] disabled works" /><br />
+  <input type="text" [disabled]="_isDisabled2" [id]="_id" value="[ var ] enabled works" /><br />
+
+  <h3>property binding with bind- </h3>
+  <input type="text" bind-disabled="_isDisabled1" [id]="_id" value="[ var ] disabled works" /><br />
+  <input type="text" bind-disabled="_isDisabled2" [id]="_id" value="[ var ] enabled works" /><br />
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/6.property-binding.png" alt="Output - Property binding with {{}}, [ ] and bind- " title="Output - Property binding with {{}}, [ ] and bind- " width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Property binding with {{}}, [ ] and bind- </figcaption>
   </figure>
 </p>
