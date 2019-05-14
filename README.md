@@ -18,7 +18,7 @@ Topics include
 2. [Getting Started](#02-getting-started)
 3. [Angular First Hello World App](#03-angular-first-hello-world-app)
 4. [Components](#04-components)
-5. [Interpolation (Data Binding)](#05-interpolation-(data-binding))
+5. [Interpolation (Data Binding)](#05-interpolation-data-binding)
 6. [Property Binding](#06-property-binding)
 
 01 Angular7 Introduction
@@ -547,7 +547,7 @@ button {
   </figure>
 </p>
 
-05 Interpolation (Data Binding)
+05 Interpolation Data Binding
 =====================
 - Interpolation denotes/evaluates the content inside `{{ }} braces` and displays the value in component view file
 - Interpolation = expressions, data-binding to text nodes and attribute values
