@@ -665,7 +665,7 @@ export class AppModule { }
 
 <p>
   <figure>
-    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/5.interpolation.png" alt="Output - Interpolation {{ }}" title="Output - Interpolation {{ }}" width="800" border="2" />
-    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Interpolation {{ }}</figcaption>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/5.interpolation.png" alt="Output - Interpolation Data Binding {{ }}" title="Output - Interpolation Data Binding {{ }}" width="800" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Interpolation Data Binding {{ }}</figcaption>
   </figure>
 </p>
