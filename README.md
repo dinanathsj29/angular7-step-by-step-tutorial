@@ -20,6 +20,10 @@ Topics include
 4. [Components](#04-components)
 5. [Interpolation (Data Binding)](#05-interpolation-data-binding)
 6. [Property Binding](#06-property-binding)
+7. [Class Binding](#07-class-binding)
+8. [Style Binding](#08-style-binding)
+9. [Event Binding](#09-event-binding)
+
 
 01 Angular7 Introduction
 =====================
@@ -754,5 +758,244 @@ export class ComponentDemo5PropertybindingComponent implements OnInit {
   <figure>
     &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/6.property-binding.png" alt="Output - Property binding with {{}}, [ ] and bind- " title="Output - Property binding with {{}}, [ ] and bind- " width="1000" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Property binding with {{}}, [ ] and bind- </figcaption>
+  </figure>
+</p>
+
+07 Class Binding
+=====================
+- Class binding refers to applying different classes normally or depends on condition (dynamically)
+- Class binding is very important and really useful as it allows developer to apply/add and remove classes to html element dynamically based on condition or user interaction
+- Class Binding Syntax: `<tag [class]="varName" />`, here `varName holds css className`
+- If `[class] binding` and `class=" "` attribute both present in tag, `[class] binding` get first/higher priority and `class=" "` attribute becomes null & void (class style properties not applied to text -  so its advisable to use any one either class binding or class attribute)
+- `[ngClass]` directive/attribute helps to apply multiple classes conditionally `<tag [ngClass]="varObjectName"`
+
+> **Syntax & Example**: styles.css (write css classes in any file)
+```css
+.text-primary {
+  color: blue;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-success {
+  color: lawngreen;
+}
+
+.text-special {
+  font-weight:bold;
+  font-style: italic;
+  color:orchid;
+}
+
+.text-strikethrough {
+  text-decoration: line-through;
+}
+
+.text-orange {
+  color: orange;
+}
+```
+
+> **Syntax & Example**: component-demo6-classbinding.component.ts
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo6-classbinding',
+  templateUrl: './component-demo6-classbinding.component.html',
+  styleUrls: ['./component-demo6-classbinding.component.css']
+})
+export class ComponentDemo6ClassbindingComponent implements OnInit {
+  public successClass = 'text-success';
+  public dangerClass = 'text-danger';
+  public isSpecialClass = true;
+  public isErrorClass = true;
+
+  public messageClasses = {
+    'text-primary': this.isSpecialClass,
+    'text-strikethrough': this.isSpecialClass
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo6-classbinding.component.html
+```html
+<div>
+  <h1>component-demo6-classbinding works! </h1>
+
+  <h3 ngNonBindable>[class]="varName" (varName holds css className present in css)</h3>
+
+  <h4 class="text-orange">simple class attribute</h4>
+  
+  <h4 [class]="successClass">This is class binding with []</h4>
+
+  <h4 class="{{successClass}}">This is class binding with interpolation</h4>
+
+  <h4 [class]="successClass" class="text-orange">This is class binding with [] also class attribute</h4>
+
+  <h4 [class.text-special]="isSpecialClass">This is class binding with boolean variable condition </h4>
+
+  <h4 [class.text-danger]="isErrorClass">This is class binding with boolean variable condition </h4>
+
+  <h4 [ngClass]="messageClasses">This is ngClass binding to deal with multiple classes at once</h4>
+  
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/7.class-binding.png" alt="Output - Class binding with {{}}, [ ] and ngClass" title="Output - Class binding with {{}}, [ ] and ngClass" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Class binding with {{}}, [ ] and ngClass</figcaption>
+  </figure>
+</p>
+
+08 Style Binding
+=====================
+- Style binding is similar to class binding but it refers to applying different inline styles to html element instead of applying css classes
+- Style Binding Syntax: 
+```
+<tag [style.color]="'orange'"> text </tag> 
+OR 
+<tag [style.color]="'varName'"> text </tag>
+```
+- `[ngStyle]` directive/attribute helps to apply multiple inline styles `<tag [ngStyle]="varObjectName"`
+
+> **Syntax & Example**: component-demo7-stylebinding.component.ts 
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo7-stylebinding',
+  templateUrl: './component-demo7-stylebinding.component.html',
+  styleUrls: ['./component-demo7-stylebinding.component.css']
+})
+export class ComponentDemo7StylebindingComponent implements OnInit {
+  public greenColor = 'green';
+  public redColor = 'red';
+  public orangeColor = 'orange';
+  public hasError = true;
+
+  public headerStyles = {
+    color: 'blue',
+    textDecoration: 'line-through',
+    fontStyle: 'italic'
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo7-stylebinding.component.html
+```html
+<div>
+  <h1>component-demo7-stylebinding works!</h1>
+
+  <h3 ngNonBindable> &lt;tag [style.color]="'orange'"&gt; text &lt;/tag&gt;</h3>
+  <h4 [style.color]="'orange'">applying inline styles</h4>
+
+  <h3 ngNonBindable> &lt;tag [style.color]="'varName'"&gt; text &lt;/tag&gt;</h3>
+  <h4 [style.color]="greenColor">applying inline styles with variable </h4>
+
+  <h3 ngNonBindable> &lt;style.color]="hasError ? 'red' : 'green' "&gt; text &lt;/tag&gt;</h3>
+  <h4 [style.color]="hasError ? 'red' : 'green' ">applying inline styles with variable conditions</h4>
+
+  <h4 [ngStyle]="headerStyles">applying multiple inline styles</h4>
+</div>
+
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/8.style-binding.png" alt="Output - Style binding with [style.] and [ngStyle]" title="Output - Style binding with [style.] and [ngStyle]" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Style binding with [style.] and [ngStyle]</figcaption>
+  </figure>
+</p>
+
+09 Event Binding
+=====================
+- Event binding captures any DOM event and performs actions
+- Angular provides an ability to bind the events along with the methods, Event binding is used with `parenthesis ()`
+- Usually data binding done from Component Class `.ts` to Component Template `.html` (variables in class .ts files used/bind with html/template .html)
+- To responds to user events like mouse clicks or keyboard events we need data flow from TEMPLATE to CLASS, event binding flows from TEMPLATE to CLASS (.HTML/TEMPLATE/VIEW to .TS/CLASS file)
+- Syntax: `<h1 (click)="fn()">Click Me - Change Style</h1>`
+
+> **Syntax & Example**: component-demo8-eventbinding.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo8-eventbinding',
+  templateUrl: './component-demo8-eventbinding.component.html',
+  styleUrls: ['./component-demo8-eventbinding.component.css']
+})
+export class ComponentDemo8EventbindingComponent implements OnInit {
+  public isButtonClicked = false;
+  public greetingMessage = '';
+  public eventType = '';
+  // public withoutHandlerMessage = '';
+
+  fn_changeStyles() {
+    this.isButtonClicked = !this.isButtonClicked;
+    this.greetingMessage = 'welcome to event binding';
+  }
+
+  fn_checkClick(evt) {
+    console.log(evt);
+    this.eventType = evt.type;
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo8-eventbinding.component.html
+```html
+<div>
+  <h1>component-demo8-eventbinding works!</h1>
+
+  <h2>Event Binding</h2>
+- Event binding captures any DOM event and performs actions
+- Angular provides an ability to bind the events along with the methods, Event binding is used with `parenthesis ()`
+- Usually, data binding is done from Component Class `.ts` to Component Template `.html` (variables in class .ts files used/bind with HTML/template .html)
+- To respond to user events like mouse clicks or keyboard events we need data flow from TEMPLATE to CLASS, event binding flows from TEMPLATE to CLASS (.HTML/TEMPLATE/VIEW to .TS/CLASS file)
+
+  <h1 (click)="fn_changeStyles()" [class.text-primary]="isButtonClicked" style="cursor:pointer;">Click Me - Change Style</h1>
+
+  <div>isButtonClicked: {{isButtonClicked}}.  | {{isButtonClicked ? greetingMessage : " "}} </div> <br /><br />
+
+  <button (click)="fn_checkClick($event)">Click me!</button> Event: {{eventType}} 
+
+  <button (click)="withoutHandlerMessage = 'Without handler function' ">Without handler function - Click me!</button> {{withoutHandlerMessage}}
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/9.event-binding-1.png" alt="Event binding with (click)" title="Event binding with (click)" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Event binding with (click)</figcaption>
+  </figure>
+</p>
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/9.event-binding-2.png" alt="Image - Output - Event binding with (click) - After Click" title="Image - Output - Event binding with (click) - After Click" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Event binding with (click) - After Click</figcaption>
   </figure>
 </p>
