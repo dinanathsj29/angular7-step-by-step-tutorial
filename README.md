@@ -23,7 +23,7 @@ Topics include
 7. [Class Binding](#07-class-binding)
 8. [Style Binding](#08-style-binding)
 9. [Event Binding](#09-event-binding)
-
+10. [Template Reference Variables](#10-template-reference-variables)
 
 01 Angular7 Introduction
 =====================
@@ -73,7 +73,7 @@ Let’s focus through some of the main differences between AngularJS and Angular
 
 | AngularJs                                 | Angular                                   |
 | ------------------------------------------|-------------------------------------------|
-| **Angular is a complete rewrite of AngularJS**                                        |
+|                                           | **Angular is a complete rewrite of AngularJS**  |
 | AngularJS is the name of the `first version of v1.XX (1.0 version)`.                      | Angular is the name of the Angular's `version beyond 2+ (Angular v2.0 and above i.e. 2/4/5/6/7 and coming future angular versions...)`                                                                   |
 | AngularJS is a `JavaScript` based open-source front-end web application framework.    | Angular is a `JavaScript/TypeScript/Dart` based open-source front-end web application framework.     |
 | AngularJS uses the concept of `scope($scope)` or `controller`.                        | Angular uses a hierarchy of `components` as its primary architectural base.                            |
@@ -997,5 +997,58 @@ export class ComponentDemo8EventbindingComponent implements OnInit {
   <figure>
     &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/9.event-binding-2.png" alt="Image - Output - Event binding with (click) - After Click" title="Image - Output - Event binding with (click) - After Click" width="1000" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Event binding with (click) - After Click</figcaption>
+  </figure>
+</p>
+
+10 Template Reference Variables
+=====================
+- When there is a user interaction we may want some data to flow from VIEW/TEMPLATE (.HTML) to the class .TS) to perform some operation  
+    - Example: value from input fields to perform some validation etc
+- To easily access DOM elements and their properties, Template Reference Variables is used
+- Template Reference Variables is created with #hash symbol followed by var name i.e. `#heading1`
+- Syntax: `<h1 #heading1>I am heading 1</h1>`, here `#heading1` is Template Reference Variable (a dynamic name/id) assigned to h1 tag
+
+> **Syntax & Example**: component-demo9-templaterefvars.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo9-templaterefvars',
+  templateUrl: './component-demo9-templaterefvars.component.html',
+  styleUrls: ['./component-demo9-templaterefvars.component.css']
+})
+export class ComponentDemo9TemplaterefvarsComponent implements OnInit {
+  logDetails(_value) {
+    console.log(_value);
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo9-templaterefvars.component.html
+```html
+<div>
+  <h1>component-demo9-templaterefvars works!</h1>
+
+  <h2>Template Reference Variables</h2>
+ 
+  <input #textInput type="text" placeholder="Enter Name" /> &nbsp; &nbsp;
+
+  <button (click)="logDetails(textInput)">Get Input Field</button> &nbsp; &nbsp;
+
+  <button (click)="logDetails(textInput.value)">Get Value of field </button> &nbsp; &nbsp;
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/10.template-ref-var.png" alt="Output - Template Reference Variables" title="Output - Template Reference Variables" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Template Reference Variables</figcaption>
   </figure>
 </p>
