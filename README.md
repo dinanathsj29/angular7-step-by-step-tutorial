@@ -25,6 +25,7 @@ Topics include
 9. [Event Binding](#09-event-binding)
 10. [Template Reference Variables](#10-template-reference-variables)
 11. [Two Way Data Binding](#11-two-way-data-binding)
+12. [ngIf Directive](#12-ngIf-directive)
 
 01 Angular7 Introduction
 =====================
@@ -1183,3 +1184,94 @@ export class ComponentDemo11TwowaydatabindingComponent implements OnInit {
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Two way data binding with [(ngModel)], FormsModule</figcaption>
   </figure>
 </p>
+
+12 ngIf Directive
+=====================
+- Directives are an `instructions in the DOM`, they specify how to place your components and business logic in the Angular
+- Directives are js class and `declared as @directive`
+- There are 3 main types of directives in Angular:
+    1. **Component Directives** - Component directives are used in `main class (app.component.ts)`. They contain the detail of how the component should be processed, instantiated and used at runtime
+    2. **Structural Directives** - Structural Directives let us `Add or Remove (Show or Hide) HTML elements` from DOM. Structural directives `start with a * sign`. These directives are used to `manipulate and change the structure of the DOM elements`. For example, *ngIf and *ngFor etc.
+    3. **Attribute Directives** - Attribute directives `look like a normal HTML Attribute` and mainly used in `databinding and event binding`. Attribute directives are used to `change the look and behavior of the DOM elements`. Attribute Directives affect only the element they are added to. For example: ngClass, ngStyle etc. 
+- Most important/widely used inbuilt Structural directives are: 
+    - **ngIf** - conditionally render/show-hide html elements 
+    - **ngSwitch** - conditionally render/show-hide html elements 
+    - **ngFor** - render/show list of html elements through loop
+
+*ngIf
+---------------------
+- *ngIf directive is used to change the output conditionally
+- If the condition is false, the DOM element does not render
+- With *ngIf use truthy or falsy value which conditionally renders the DOM elements
+- `ng-template` is like a container for chunks/group of HTML elements controlled once
+
+> **Syntax & Example**: component-demo12-ngif.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo12-ngif',
+  templateUrl: './component-demo12-ngif.component.html',
+  styleUrls: ['./component-demo12-ngif.component.css']
+})
+export class ComponentDemo12NgifComponent implements OnInit {
+  public isShow=true;
+  public hasDisplay=false;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo12-ngif.component.html
+```html
+<div>
+  <h1>component-demo12-ngif works!</h1>
+
+  <h2>*ngIf</h2>
+  
+  <ul>
+    <li *ngIf="true">Show me </li>
+    <li *ngIf="false">I am NOT rendered in DOM </li>
+    <li *ngIf="isShow">Please show me - conditional variable/property from class</li>
+  </ul>
+
+  <h2>ngIf else ng-template</h2>
+  If condition is false, different DOM element renders as specified in "ng-template else">
+
+  <!-- variable true - show me, else show other ng-template -->
+  <div *ngIf="hasDisplay; else elseTemplate">
+    <h5>I have used in ngIf TRUE part</h5>
+  </div>
+
+  <ng-template #elseTemplate>
+    <h5>I am using ngIf FALSE/ELSE part in ng-template</h5>
+  </ng-template>
+
+  <h2>ngIf - ng-template else ng-template</h2>
+  depends on variable/condition show ng-template1 else show other ng-template2
+
+  <!-- variable true then show ng-template1 else show other ng-template2 -->
+  <div *ngIf="hasDisplay; then trueTemplate; else falseTemplate"></div>
+
+  <ng-template #trueTemplate>
+    <h5>I am #trueTemplate</h5>
+  </ng-template>
+
+  <ng-template #falseTemplate>
+    <h5>I am #falseTemplate</h5>
+  </ng-template>
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/12.structural-directive-ngIf.png" alt="Image - Output - *ngIf - Structural directive to control/add/remove elements to DOM conditionally" title="Image - Output - *ngIf - Structural directive to control/add/remove elements to DOM conditionally" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - *ngIf - Structural directive to control/add/remove elements to DOM conditionally</figcaption>
+  </figure>
+</p>
+
