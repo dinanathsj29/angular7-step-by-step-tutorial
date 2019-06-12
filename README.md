@@ -24,6 +24,7 @@ Topics include
 8. [Style Binding](#08-style-binding)
 9. [Event Binding](#09-event-binding)
 10. [Template Reference Variables](#10-template-reference-variables)
+11. [Two Way Data Binding](#11-two-way-data-binding)
 
 01 Angular7 Introduction
 =====================
@@ -74,7 +75,7 @@ Let’s focus through some of the main differences between AngularJS and Angular
 | AngularJs                                 | Angular                                   |
 | ------------------------------------------|-------------------------------------------|
 |                                           | **Angular is a complete rewrite of AngularJS**  |
-| AngularJS is the name of the `first version of v1.XX (1.0 version)`.                      | Angular is the name of the Angular's `version beyond 2+ (Angular v2.0 and above i.e. 2/4/5/6/7 and coming future angular versions...)`                                                                   |
+| AngularJS is the name of the `first version of v1.XX (1.0 version)`.                  | Angular is the name of the Angular's `version beyond 2+ (Angular v2.0 and above i.e. 2/4/5/6/7 and coming future angular versions...)`                                                                   |
 | AngularJS is a `JavaScript` based open-source front-end web application framework.    | Angular is a `JavaScript/TypeScript/Dart` based open-source front-end web application framework.     |
 | AngularJS uses the concept of `scope($scope)` or `controller`.                        | Angular uses a hierarchy of `components` as its primary architectural base.                            |
 | AngularJS has a simple syntax and uses to work with different directives like `ng-app`, `ng-init`, `ng-model`, `ng-for` etc.                                                               | In Angular syntax have been changed as it uses `[ ]` for property binding, and `( )` for event binding. |
@@ -970,10 +971,6 @@ export class ComponentDemo8EventbindingComponent implements OnInit {
   <h1>component-demo8-eventbinding works!</h1>
 
   <h2>Event Binding</h2>
-- Event binding captures any DOM event and performs actions
-- Angular provides an ability to bind the events along with the methods, Event binding is used with `parenthesis ()`
-- Usually, data binding is done from Component Class `.ts` to Component Template `.html` (variables in class .ts files used/bind with HTML/template .html)
-- To respond to user events like mouse clicks or keyboard events we need data flow from TEMPLATE to CLASS, event binding flows from TEMPLATE to CLASS (.HTML/TEMPLATE/VIEW to .TS/CLASS file)
 
   <h1 (click)="fn_changeStyles()" [class.text-primary]="isButtonClicked" style="cursor:pointer;">Click Me - Change Style</h1>
 
@@ -1050,5 +1047,139 @@ export class ComponentDemo9TemplaterefvarsComponent implements OnInit {
   <figure>
     &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/10.template-ref-var.png" alt="Output - Template Reference Variables" title="Output - Template Reference Variables" width="1000" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Template Reference Variables</figcaption>
+  </figure>
+</p>
+
+11 Two Way Data Binding
+=====================
+- Data binding is one of the most powerful features of Angular, used widely for communication between TypeScript code (.ts - business logic) and different components (.html - view/template) shown to the users
+- Whenever we work with Input Form fields its necessary/essentials that MODEL (data) and VIEW (template) both syncs well (any changes into HTML field should update the model/property and any updates/changes in model/property/variable than view should reflect those updated values)
+- There are two types of data binding:
+    1. One way data binding 
+    2. Two way data binding 
+
+11.1. One way data binding
+---------------------
+- One way data binding is a simple/normal one way communication where HTML template is changed when any changes to TypeScript code/model/data/variable
+- In one way data binding value of Model is used in the View (HTML) but we can't update Model from the View (.HTML Template)
+- Example:  Interpolation / String Interpolation, Property Binding, and Event Binding
+- One way data binding works from class .ts file to template/view .html file:
+
+> **Syntax & Example**: component-demo10-onewaydatabinding.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo10-onewaydatabinding',
+  templateUrl: './component-demo10-onewaydatabinding.component.html',
+  styleUrls: ['./component-demo10-onewaydatabinding.component.css']
+})
+export class ComponentDemo10OnewaydatabindingComponent implements OnInit {
+  public inputResultValue = 'One Way Data Binding!';
+
+  public userNameText = 'Angular 7';
+
+  public changeInputText(evt) {
+    console.log(evt);
+    this.userNameText = evt.target.value;
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo10-onewaydatabinding.component.html
+```html
+<div>
+  <h1>component-demo10-onewaydatabinding works!</h1>
+
+  <h2>One way data binding</h2>
+  One way data binding works from class .ts file to template/view .html file: <br /> <br />
+  <input type="text" value={{inputResultValue}} /> <br />
+  <input type="text" [value]=inputResultValue /> <br />
+  <input type="text" bind-value=inputResultValue /> <br />
+
+  <h2>One Way Data Binding works as Two way (work around)</h2>
+  <input type="text" placeholder="Enter Name" [value]="userNameText" (input)="changeInputText($event)" /> &nbsp;&nbsp;
+  <span><em><strong>{{userNameText}}</strong></em></span>
+  
+</div>
+```
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/11.one-way-data-binding-1.png" alt="Simple one way data binding with {{}}, [ ] and bind-" title="Simple one way data binding with {{}}, [ ] and bind-" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Simple one way data binding with {{}}, [ ] and bind-</figcaption>
+  </figure>
+</p>
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/11.one-way-data-binding-2.png" alt="Image - Output - Simple one way data binding with {{}}, [ ] and bind-, used as two way data binding" title="Image - Output - Simple one way data binding with {{}}, [ ] and bind-, used as two way data binding" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Simple one way data binding with {{}}, [ ] and bind-, used as two way data binding</figcaption>
+  </figure>
+</p>
+
+11.2. Two way data binding
+---------------------
+- Two Way Data Binding helps to update the property at the same time displays the value of the property
+- In two way data binding, `automatic synchronization of data happens between the Model and the View`
+- Here whenever we make changes in the Model(data/variable) it will be reflected in the View and when you make changes in View(HTML/template) it will be reflected in Model
+- `"ngModel"` Directive is used to implement Two Way Data Binding (basically VIEW & MODEL should always be sync) 
+- `[ ] square bracket/property binding` is used for data flow from class to the template and `( ) parentheses/event binding` for data from template to class 
+- `[(ngModel)]` - this syntax is known as `[(banana in the box)]`
+- To use `[(ngModel)]` Directive we must need to `import FormsModule` from `@angular/forms` and also add to imports array in app.module.ts: `import { FormsModule } from '@angular/forms';`
+- > **Note**: In two way data binding value flow from an Input Text field to the class file and then to view/template file
+
+> **Syntax & Example**: app.module.ts
+```ts
+// import forms module for two way data binding
+import { FormsModule } from '@angular/forms';
+
+imports: [
+    BrowserModule,
+    FormsModule
+  ],
+```
+
+> **Syntax & Example**: component-demo11-twowaydatabinding.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo11-twowaydatabinding',
+  templateUrl: './component-demo11-twowaydatabinding.component.html',
+  styleUrls: ['./component-demo11-twowaydatabinding.component.css']
+})
+export class ComponentDemo11TwowaydatabindingComponent implements OnInit {
+  public nameText = 'Angular 6';
+  
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo11-twowaydatabinding.component.html
+```html
+<div>
+  <h1>component-demo11-twowaydatabinding works!</h1>
+
+  <h2>Two way data binding</h2>
+  
+  <input type="text" [(ngModel)]="nameText" placeholder="Enter Name"/> {{nameText}}
+  
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/12.two-way-data-binding.png" alt="Image - Output - Two way data binding with [(ngModel)], FormsModule" title="Image - Output - Two way data binding with [(ngModel)], FormsModule" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Two way data binding with [(ngModel)], FormsModule</figcaption>
   </figure>
 </p>
