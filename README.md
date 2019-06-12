@@ -26,6 +26,8 @@ Topics include
 10. [Template Reference Variables](#10-template-reference-variables)
 11. [Two Way Data Binding](#11-two-way-data-binding)
 12. [ngIf Directive](#12-ngIf-directive)
+13. [ngSwitch Directive](#13-ngSwitch-directive)
+14. [ngFor Directive](#14-ngFor-directive)
 
 01 Angular7 Introduction
 =====================
@@ -1275,3 +1277,124 @@ export class ComponentDemo12NgifComponent implements OnInit {
   </figure>
 </p>
 
+13 ngSwitch Directive
+=====================
+- ngSwitch directive is similar to other programming languages swtich statement, only the `difference is with angular we render HTML elements instead of executing logics`
+
+> **Syntax & Example**: component-demo13-ngswitch.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo13-ngswitch',
+  templateUrl: './component-demo13-ngswitch.component.html',
+  styleUrls: ['./component-demo13-ngswitch.component.css']
+})
+export class ComponentDemo13NgswitchComponent implements OnInit {
+  public curColor='red';
+  // public curColor='green';
+  // public curColor = 'blue';
+
+  // public curColor = 'black';
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo13-ngswitch.component.html
+```html
+<div>
+  <h1>component-demo13-ngswitch works!</h1>
+
+  <h2>*ngSwtich</h2>
+
+  <div [ngSwitch]="curColor">
+    <div *ngSwitchCase="'red'" [style.color]="curColor">RED | {{curColor}} | color</div>
+    <div *ngSwitchCase="'green'" [style.color]="curColor">GREEN | {{curColor}} | color</div>
+    <div *ngSwitchCase="'blue'" [style.color]="curColor">BLUE | {{curColor}} | color</div>
+    <div *ngSwitchDefault>Default BLACK</div>
+  </div>
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/13.structural-directive-ngSwitch.png" alt="Image - Output - *ngSwitch - Structural directive to control/add/remove elements to DOM conditionally" title="Image - Output - *ngSwitch - Structural directive to control/add/remove elements to DOM conditionally" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - *ngSwitch - Structural directive to control/add/remove elements to DOM conditionally</figcaption>
+  </figure>
+</p>
+
+14 ngFor Directive
+=====================
+- ngFor directive is similar to other programming languages for loop statement, only the `difference is with angular we render the list of HTML elements instead of executing logics`
+
+> **Syntax & Example**: component-demo14-ngfor.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo14-ngfor',
+  templateUrl: './component-demo14-ngfor.component.html',
+  styleUrls: ['./component-demo14-ngfor.component.css']
+})
+export class ComponentDemo14NgforComponent implements OnInit {
+  // public arrColors = ['red', 'green', 'blue','cyan','magenta','black'];
+  public arrColors = ['red', 'green', 'blue'];
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo14-ngfor.component.html
+```html
+<div>
+  <h1>component-demo14-ngfor works!</h1>
+
+  <h2>*ngFor</h2>
+
+  <h2>*ngFor Basics </h2>
+  <ul>
+    <li *ngFor="let color of arrColors" [style.color]="color">
+      {{color}}
+    </li>
+  </ul>
+
+  <h2>*ngFor with id and class </h2>
+  <ul>
+    <li *ngFor="let color of arrColors;" id="{{color}}" class="{{color}}" [style.color]="color">
+      {{color}}
+    </li>
+  </ul>
+
+  <h2>*ngFor with index </h2>
+  <ul>
+    <li *ngFor="let color of arrColors; index as curIndex" id="{{color}}" class="{{color}}" [style.color]="color">
+      Index is: {{curIndex + 1 }}. {{color}}
+    </li>
+  </ul>
+
+  <h2>*ngFor with index - first / last / even / odd </h2>
+  <ul>
+    <li *ngFor="let color of arrColors; index as curIndex; first as firstIndex; last as lastIndex; even as evenIndex; odd as oddIndex" id="{{color}}" class="{{color}}" [style.color]="color">
+      {{curIndex}}. {{color}}  :--:  First Item: {{firstIndex}}  :--: Last Item: {{lastIndex}}  :--:  Odd: {{oddIndex}} :--:  Even: {{evenIndex}} :--:
+    </li>
+  </ul>
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/14.structural-directive-ngFor.png" alt="Image - Output - *ngFor - Structural directive to render/loop html elements from an array/object" title="Image - Output - *ngFor - Structural directive to render/loop html elements from an array/object" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - *ngFor - Structural directive to render/loop html elements from an array/object</figcaption>
+  </figure>
+</p>
