@@ -28,6 +28,8 @@ Topics include
 12. [ngIf Directive](#12-ngIf-directive)
 13. [ngSwitch Directive](#13-ngSwitch-directive)
 14. [ngFor Directive](#14-ngFor-directive)
+15. [Component Interaction](#15-component-interaction)
+16. [Pipes](#16-pipes)
 
 01 Angular7 Introduction
 =====================
@@ -1396,5 +1398,279 @@ export class ComponentDemo14NgforComponent implements OnInit {
   <figure>
     &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/14.structural-directive-ngFor.png" alt="Image - Output - *ngFor - Structural directive to render/loop html elements from an array/object" title="Image - Output - *ngFor - Structural directive to render/loop html elements from an array/object" width="1000" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - *ngFor - Structural directive to render/loop html elements from an array/object</figcaption>
+  </figure>
+</p>
+
+15 Component Interaction
+=====================
+- Component interact [parent to child and vice versa] with @input() & @output() decorator
+    - **@input() decorator** - Parent component sends data, Child component accepts with @input() decorator `(parent to child component communication with @input() decorator)`
+    - **@output() decorator** - Child component sends data/events, Parent component accepts with @output() decorator `(child to parent component communication with @output() decorator)`
+- To send data from Child to Parent we need events i.e. create `Events-EventEmitter`
+
+15.1. Parent to child communication with @Input() decorator:
+------------------------------
+1. Parent class/.ts file - Create a property or class member/variable, example: `parentMessage = 'From Parent';`
+2. Parent view/.html file - In child selector tag use parent variable with property binding for communication, example: `<app-component-demo15-childparent [parentData]="parentMessage"></app-component-demo15-childparent>`
+3. Child component class/.ts file - Receive data data/value coming from parent component, example: `@Input() public parentData;`
+4. Child view/.html file - Bind / Get Parent Data in Child component example: `Hello <strong>{{parentData}}</strong>`
+
+> **Syntax & Example**: parent component - app.component.ts
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  // create a property to send from parent to child
+  parentMessage = 'From Parent';
+    
+}
+```
+
+> **Syntax & Example**: parent component - app.component.html
+```html
+<!-- component interaction - parent to child and child to parent communication -->
+
+<!-- send property from parent to child - include in child element component selector -->
+<app-component-demo15-childparent [parentData]="parentMessage"></app-component-demo15-childparent>
+```
+
+> **Syntax & Example**: child component - component-demo15-childparent.component.ts
+```ts
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo15-childparent',
+  templateUrl: './component-demo15-childparent.component.html',
+  styleUrls: ['./component-demo15-childparent.component.css']
+})
+export class ComponentDemo15ChildparentComponent implements OnInit {
+  // parent to child 
+
+  // receive data data/value coming from parent component
+  @Input() public parentData;
+  // @Input() public parentName;
+
+  // alias based method
+  // @Input('parentData') public parentName;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: child component - component-demo15-childparent.component.html
+```html
+<div>
+  <h1>component-demo15-childparent works!</h1>
+
+  <!-- parent to child -->
+
+  <u>Bind / Get Parent Data in Child component</u>:
+  Hello <strong>{{parentData}}</strong> <br /> <br /> <br />
+
+  <!-- <u>bind / Get Parent Data in Child alias based method</u>:
+  Hello <strong>{{parentName}}</strong> <br /><br /> -->
+  
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/15.1.component-communication-parent-child-input.png" alt="Image - Output - component communication parent to child with input decorator" title="Image - Output - component communication parent to child with input decorator" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - component communication parent to child with input decorator</figcaption>
+  </figure>
+</p>
+
+15.2. Child to parent communication with @Ouput() decorator:
+------------------------------
+1. Child component class/.ts file - Create child output event to send to parent by using EventEmitter class
+2. Child component class/.ts file - Create child event handler function and emit some events/message
+3. Child view/.html file - Create a button element to fire child event handler function
+4. Parent view/.html file - In child selector tag capture child event, example: `<app-component-demo15-childparent (childEvent)="messageChild=($event)"></app-component-demo15-childparent>`
+5. Parent view/.html file - Bind the messageChild property in view `<u>Parent component showing message from child component</u>: <strong>{{messageChild}}</strong>`
+
+> **Syntax & Example**: child component - component-demo15-childparent.component.ts
+```ts
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo15-childparent',
+  templateUrl: './component-demo15-childparent.component.html',
+  styleUrls: ['./component-demo15-childparent.component.css']
+})
+export class ComponentDemo15ChildparentComponent implements OnInit {
+  // parent to child 
+
+  // receive data data/value coming from parent component
+  @Input() public parentData;
+  // @Input() public parentName;
+
+  // alias based method
+  // @Input('parentData') public parentName;
+
+  // child to parent
+
+  // create child event to send to parent
+  @Output() public childEvent = new EventEmitter();
+
+  // child event handler function
+  childFireEvent() {
+    this.childEvent.emit("Message from Child to Parent");
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: child component - component-demo15-childparent.component.html
+```html
+<div>
+    <h1>component-demo15-childparent works!</h1>
+    <!-- child to parent -->
+
+    <!-- Fire child event on button click -->
+    <button (click)="childFireEvent()">Send Child Event to Parent</button>
+</div>
+```
+
+> **Syntax & Example**: parent component - app.component.ts
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  // create a property to send from parent to child
+  parentMessage = 'From Parent';
+  
+  // child to parent
+  messageChild;
+}
+```
+
+> **Syntax & Example**: parent component - app.component.html
+```html
+<!-- component interaction - parent to child and child to parent communication -->
+
+<!-- send property from parent to child - include in child element component selector -->
+<app-component-demo15-childparent [parentData]="parentMessage" (childEvent)="messageChild=($event)"></app-component-demo15-childparent>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/15.2.component-communication-child-parent-ouput.png" alt="Image - Output - component communication child to parent with ouput decorator" title="Image - Output - component communication child to parent with ouput decorator" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - component communication child to parent with ouput decorator</figcaption>
+  </figure>
+</p>
+
+16 Pipes
+=====================
+- Pipes (Filters) helps to `transform data before displaying to view`
+- Pipes (Filters) can be added in AngularJS to format data
+- Pipes (Filters) is denoted by `piping |` symbol
+- There are many built-in/default pipes available in angular like: `String related pipes` (uppercase, lowercase), `Number related pipes` (number), `Currency` pipes, `Date` pipes, `JSON` pipes. 
+- We can also create custom pipes as per out requirements with `Pipe, PipeTransform class & transform method`
+
+> **Syntax & Example**: component-demo16-pipesfilters.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-component-demo16-pipesfilters',
+  templateUrl: './component-demo16-pipesfilters.component.html',
+  styleUrls: ['./component-demo16-pipesfilters.component.css']
+})
+export class ComponentDemo16PipesfiltersComponent implements OnInit {
+  public nameText = 'Angular js';
+  public messageText = 'Welcome to Angularjs';
+  public greetingText = 'angular 2/4/5/6 is component based';
+
+  public objTechnology = {
+    'firstName': 'angular',
+    'lastName': 'js',
+    'version': 6.0
+  }
+
+  public number1 = 5.786;
+
+  public currentDate = Date();
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo16-pipesfilters.component.html
+```html
+<div>
+  <h1>component-demo16-pipesfilters works!</h1>
+
+  <h2>pipes</h2>
+  
+  <h2>String based Pipes : Format string</h2>
+  uppercase: {{ nameText | uppercase }} <br />
+  lowercase: {{ messageText | lowercase }} <br />
+  titlecase: {{ greetingText | titlecase }} <br />
+
+  slice:start:end (not including that letter): {{ greetingText | slice:8}} <br />
+  <!-- slice:starting point:limit/up to (not including that letter) -->
+  slice:start:end (not including that letter): {{ greetingText | slice:14:15}} <br />
+
+  <h2>JSON Pipes - Shows json representation of an object</h2>
+  json: {{ objTechnology | json }} <br />
+
+  <h2>Number Pipes - Format Number, Integers</h2>
+  <!-- min integer digit. min decimal digit - max decimal digit. -->
+  number (min integer digit. min decimal digit - max decimal digit): {{ 5.29898 | number:"1.2-3" }} <br />
+  number (min integer digit. min decimal digit - max decimal digit): {{ 5.29898 | number:"2.2-2" }} <br />
+
+  percent: {{ 0.29898 | percent }} <br />
+
+  <h2>Currency Pipes - Transform Currency values</h2>
+  currency: {{ 0.29898 | currency }}<br />
+  currency: {{ 0.29898 | currency:'Rs.' }} <br />
+  currency: {{ 0.29898 | currency:'GBP' }} <br />
+  currency: {{ 0.29898 | currency:'GBP':'code' }} <br />
+
+  <h2>Date Pipes - Transform Date</h2>
+  Date: {{ currentDate }}<br />
+
+  date:short: {{ currentDate | date:'short' }}<br />
+  date:shortDate: {{ currentDate | date:'shortDate' }}<br />
+  date:shortTime: {{ currentDate | date:'shortTime' }} <br /> <br />
+
+  date:medium: {{ currentDate | date:'medium' }}<br />
+  date:mediumDate: {{ currentDate | date:'mediumDate' }}<br />
+  date:mediumTime: {{ currentDate | date:'mediumTime' }}<br /> <br />
+
+  date:long: {{ currentDate | date:'long' }}<br />
+  date:longDate: {{ currentDate | date:'longDate' }}<br />
+  date:longTime: {{ currentDate | date:'longTime' }}<br /> <br />
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/16.pipes-filters.png" alt="Image - Output - Transform/Format data with pipes" title="Image - Output - Transform/Format data with pipes" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Transform/Format data with pipes</figcaption>
   </figure>
 </p>
