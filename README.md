@@ -30,6 +30,8 @@ Topics include
 14. [ngFor Directive](#14-ngFor-directive)
 15. [Component Interaction](#15-component-interaction)
 16. [Pipes](#16-pipes)
+17. [Services](#17-services)
+18. [Dependency Injection (DI)](#18-dependency-injection-(di))
 
 01 Angular7 Introduction
 =====================
@@ -1674,3 +1676,30 @@ export class ComponentDemo16PipesfiltersComponent implements OnInit {
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - Transform/Format data with pipes</figcaption>
   </figure>
 </p>
+
+17 Services
+=====================
+- Programming Principles:
+    - **DRY** - Do not repeat yourself (DRY) - Avoid making copies of data in different files. (example: List & Details components using same employee object created twice in respective class file)
+    - **SRP** - Single Responsibility Principles (one class/function should perform one task/responsibility)
+    - **KISS** - Keep It Simple Stupid!
+- Service is a class with a specific purpose and widely used to:
+    - Share data - Between multiple pages/components
+    - Implement application logic - Calculations, Repeatative tasks/functionalities etc.
+    - External Interaction - Database connectivity
+- Services are a great and awesome way to share information among multiple classes/components, just reate a service and inject it in respective classes/components
+
+18 Dependency Injection (DI)
+=====================
+- Drawback of code without Dependency Injection (DI):
+    - Code is not flexible
+    - If main code (dependencies) changed we need to check and change our code
+    - Code is not suitable for testing
+- Dependency Injection (DI) as a design pattern
+    - Dependency Injection DI is a coding pattern/standard in which a class receives its required dependencies from external sources rather than creating them itself to avoid tight coupling
+- Dependency Injection (DI) as a Framework - Register all dependencies with Injector a central place/container
+    - 3 steps involved to create and use service in angular:
+        1. Define the Service class 
+        2. Register with Injector
+        3. Declare as a dependency in List and Details both component
+- `@Injectable()` decorator tells angular that this service might itself have injected dependencies
