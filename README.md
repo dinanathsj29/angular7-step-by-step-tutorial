@@ -33,6 +33,8 @@ Topics include
 17. [Services](#17-services)
 18. [Dependency Injection (DI)](#18-dependency-injection-di)
 19. [Using a Service](#19-using-a-service)
+20. [HTTP and Observables](#20-http-and-observables)
+21. [Fetch Data Using HTTP & Observables](#21-fetch-data-using-http-&-observables)
 
 01 Angular7 Introduction
 =====================
@@ -1825,5 +1827,234 @@ export class ComponentDemo191ServiceemployeelistComponent implements OnInit {
   <figure>
     &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/19-services-2.png" alt="Image - Output - single service used in multiple component as per logic and requirement" title="Image - Output - single service used in multiple component as per logic and requirement" width="1000" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - single service used in multiple component as per logic and requirement</figcaption>
+  </figure>
+</p>
+
+20 HTTP and Observables
+=====================
+- Http services are used to fetch the data from web server (instead of using hard coded data/json files)
+
+20.1. Http Mechanism: 
+---------------------
+1. Send http request 
+2. Receive and process http response
+
+### Request: 
+Component file calls -> Service -> Get -> HTTP -> request -> server (DB)
+
+### Response: 
+Component file calls <- Service (cast data) <- Observable <- HTTP <- response <- server (DB)
+
+### Observables: 
+The response/results/returns which we get from the HTTP call is nothing but an Observables. The service needs to cast Observables into an Array/Object and then pass to the required components.
+
+20.2. What exactly are Observables?
+---------------------
+- A sequence of data/items that arrive asynchronously over time
+- HTTP Call = Single item and Single item = HTTP response
+- Observables are HTTP response which arrives asynchronously
+
+20.3. HTTP, Observables, and RxJS:
+---------------------
+- 4 steps to fetch data from HTTP & observables:
+    1. HTTP Get request from service
+    2. Receive the observable and cast it into an array/Object
+    3. Subscribe to the observable from List and Details component class
+    4. Assign the received array/Object to a local variable
+
+20.4. RxJS
+---------------------
+- Reactive Extensions for JavaScript
+- External library to work with Observables 
+- No-where related to ReactJS library from Facebook
+
+21 Fetch Data Using HTTP
+=====================
+- Http & HttpClientModule:
+- Till Angular 4 - Http module used
+- In Angular 5 - HttpClientModule used (HttpClientModule provides simplified APIs to work with http functionality)
+- We know an Observables are return as result of a http call, to handle an exceptions on observables we make a use of 'catch' operator
+<br /><br />
+- 4 steps to fetch data from http & observables:
+    1. HTTP Get request from service
+    2. Receive the observable and cast it into an array/Object
+    3. Subscribe to the observable from List and Details component class
+    4. Assign the received array/Object to local variable
+- create a custom service to handle http data with command: ng g s employeeHttp
+
+1.HTTP Get request from service
+---------------------
+> **Syntax & Example**: 1. app.module.ts
+```ts
+ // import HttpClientModule and add to imports array
+    // 1a. import HttpClientModule
+    import { HttpClientModule } from '@angular/common/http'
+
+    // 1b. add to imports array
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule
+    ],
+     
+    // 1c. import custom created service Register with Injector
+    import { EmployeeHttpService } from './employee-http.service';
+
+    // import service in providers
+    providers: [EmployeeService, EmployeeHttpService],
+```
+
+2.Receive the observable and cast it into an array/Object
+---------------------
+> **Syntax & Example**: 2. employee-http.service.ts
+```ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { IEmployee } from '../models/iemployee';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EmployeehttpService {
+  // 2c. create json data file
+  private jsonUrl:string= "/assets/data/employees.json";
+
+  // 2a. create local variable for HttpClient as DI
+  constructor(private httpClient: HttpClient) { }
+
+  // 2b. http get
+  getEmployees(): Observable<IEmployee[]> {
+    return this.httpClient.get<IEmployee[]>(this.jsonUrl);
+  }
+  
+}
+
+/* 
+// 2a. create local variable for HttpClient as DI
+    constructor(private _HttpClient:HttpClient) { }
+
+    import { HttpClient } from '@angular/common/http';
+
+    // 2b. in a getEmployees method make get request
+    // getEmployees(){
+    //   return this._HttpClient.get(_jsonUrl);
+    // }
+
+    // 2b. http get
+    getEmployees():Observable<IEmployee[]>{
+        return this._HttpClient.get<IEmployee[]>(this._jsonUrl);
+    }
+
+    // 2c. create json data file
+    private _jsonUrl:string= "/assets/data/employees.json";
+
+    // import model/interface file
+    import { IEmployee } from './employee-model-interface';
+    import { Observable } from 'rxjs/Observable';
+*/
+```
+
+> **Syntax & Example**: 3. ceate employees.json data file inside assets/data folder
+```json
+[
+    { "id": 1, "name": "Amitabh", "age": 75, "city": "Alahabad" },
+    { "id": 2, "name": "Akshay", "age": 55, "city": "Delhi" },
+    { "id": 3, "name": "RajaniKanth", "age": 73, "city": "Chennai" },
+    { "id": 4, "name": "Rajesh Khanna", "age": 85, "city": "Kolkatta" }
+]
+
+[
+    {"id":1, "name":"Ratan Tata", "age":75},
+    {"id":2, "name":"Adi Godrej", "age":65},
+    {"id":3, "name":"K M Birla", "age":55},
+    {"id":4, "name":"Laxmi Mittal", "age":58},
+    {"id":5, "name":"Chanda Kochar", "age":50},
+    {"id":6, "name":"Amitabh B", "age":76}
+]
+```
+
+> **Syntax & Example**: 4. create IEmployee.ts an employee model/interface file to store exact data types and rules
+```ts
+export interface IEmployee {
+    id:number;
+    name:string;
+    age:number
+}
+```
+
+3.Subscribe to the observable from List and Details component class<br/>
+4.Assign the received array/Object to local variable
+---------------------
+> **Syntax & Example**: 3. employee-http-list.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+import { EmployeehttpService } from '../services/employeehttp.service';
+
+@Component({
+  selector: 'app-component-demo211-httpemployeelist',
+  templateUrl: './component-demo211-httpemployeelist.component.html',
+  styleUrls: ['./component-demo211-httpemployeelist.component.css']
+})
+export class ComponentDemo211HttpemployeelistComponent implements OnInit {
+  public employees = [];
+
+  constructor(private employeehttpService: EmployeehttpService) { }
+
+  ngOnInit() {
+    // on component initialization get value from http subscribe
+    // data =>: argument of the function
+    // this.employees = data: body of the function
+    // subscribe: to receive data
+    this.employeehttpService.getEmployees().subscribe(data => this.employees = data)
+  }
+
+}
+```
+
+> **Syntax & Example**: component-demo211-httpemployeelist.component.html
+```html
+<div>
+  <h1>component-demo211-httpemployeelist works!</h1>
+
+  <h2>HTTP Services and Observables</h2>
+
+  <h2>Employee HTTP Observables list:</h2>
+  <ul>
+    <li *ngFor="let employee of employees">
+      {{employee.id}} {{employee.name}}
+    </li>
+  </ul>
+
+</div>
+```
+
+> **Syntax & Example**: component-demo212-httpemployee-details.component.html
+```html
+<div>
+  <h1>component-demo212-httpemployee-details works!</h1>
+
+  <h2>Employee HTTP Observables Details list:</h2>
+  <ul>
+    <li *ngFor="let employee of employees">
+      {{employee.id}} {{employee.name}} {{employee.age}} {{employee.city}}
+    </li>
+  </ul>
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/21.http-observables-1-folder-structure.png" alt="Image - Output - http-observables services and component folder structure" title="Image - Output - http-observables services and component folder structure" width="500" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - http-observables services and component folder structure</figcaption>
+  </figure>
+</p>
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/21.http-observables-2.png" alt="Image - Output - http-observables" title="Image - Output - http-observables" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - http-observables</figcaption>
   </figure>
 </p>
