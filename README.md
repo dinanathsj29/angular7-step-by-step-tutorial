@@ -32,6 +32,7 @@ Topics include
 16. [Pipes](#16-pipes)
 17. [Services](#17-services)
 18. [Dependency Injection (DI)](#18-dependency-injection-di)
+19. [Using a Service](#19-using-a-service)
 
 01 Angular7 Introduction
 =====================
@@ -1703,3 +1704,126 @@ export class ComponentDemo16PipesfiltersComponent implements OnInit {
         2. Register with Injector
         3. Declare as a dependency in List and Details both component
 - `@Injectable()` decorator tells angular that this service might itself have injected dependencies
+
+19 Using a Service
+=====================
+- 3 steps involved to create and use service in angular:
+    1. Define the Service class 
+    2. Register with Injector
+    3. Declare as a dependency in List and Details both component
+    &nbsp;  
+
+1.Define the Service class 
+---------------------
+1. Create service (which is responsible for providing employee data) with the command "ng g s employee" OR "ng generate service employee"
+
+> **Syntax & Example**: employee.service.ts
+```ts
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EmployeeService {
+  // 1.1. create a new method which holds employee data
+  getEmployees() {
+    return [
+      { 'id': 1, 'name': 'Amitabh', 'age': 75, 'city': 'Alahabad' },
+      { 'id': 2, 'name': 'Akshay', 'age': 55, 'city': 'Delhi' },
+      { 'id': 3, 'name': 'RajaniKanth', 'age': 73, 'city': 'Chennai' },
+      { 'id': 4, 'name': 'Rajesh Khanna', 'age': 85, 'city': 'Kolkatta' }
+    ]
+  }
+
+  constructor() { }
+
+}
+```
+
+2.Register with Injector
+--------------------- 
+2. Register with Injector in app module file `'app.module.ts'`
+
+> **Syntax & Example**: app.module.ts
+```ts 
+// 2.1. import custom created service to Register with Injector
+import { EmployeeService } from './services/employee.service';
+
+// 2.2. import service in providers its compulsion to insert services in the provider's array
+providers: [ EmployeeService ]
+```
+
+3.Declare as a dependency in both List and Details component
+---------------------
+3. import service in necessary component files - Declare as dependency in constructor
+employee-list.component.ts & employee-details.component.ts
+
+> **Syntax & Example**: component-demo191-serviceemployeelist.component.ts & component-demo192-serviceemployeedetails.component.ts
+```ts
+import { Component, OnInit } from '@angular/core';
+
+// 3.1. import service in necessary component files - Declared as dependency
+import { EmployeeService } from '../../services/employee.service';
+
+@Component({
+  selector: 'app-component-demo191-serviceemployeelist',
+  templateUrl: './component-demo191-serviceemployeelist.component.html',
+  styleUrls: ['./component-demo191-serviceemployeelist.component.css']
+})
+export class ComponentDemo191ServiceemployeelistComponent implements OnInit {
+  // 3.3. define an empty local employees array which will hold employees data after service all
+  public employees = [];
+
+  // 3.2. refer to service with local variable as dependency in constructor
+  constructor(private employeeService: EmployeeService) { }
+
+  ngOnInit() {
+    // 3.4. on component initialization get values from service method
+    this.employees = this.employeeService.getEmployees();
+  }
+
+}
+```
+
+4.Add Markup and bind required data in template/view - employee-list.component.html (component-demo191-serviceemployeelist.component.html) file:
+---------------------
+> **Syntax & Example**: 
+```html
+<h2>Employee list:</h2>
+<ul>
+    <li *ngFor="let employee of employees">
+        {{employee.id}} {{employee.name}} 
+    </li>
+</ul>
+```
+
+5.Add Markup and bind required data in template/view - employee-details.component.html file: component-demo192-serviceemployeedetails.component.html
+---------------------
+> **Syntax & Example**: 
+```html
+<div>
+  <h1>component-demo192-serviceemployeedetails works!</h1>
+
+  <h2>Employee Details list:</h2>
+  <ul>
+    <li *ngFor="let employee of employees">
+      {{employee.id}} {{employee.name}} {{employee.age}} {{employee.city}}
+    </li>
+  </ul>
+
+</div>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/19-services-1-folder-structure.png" alt="Image - Output - services and component folder structure" title="Image - Output - services and component folder structure" width="500" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - services and component folder structure</figcaption>
+  </figure>
+</p>
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/19-services-2.png" alt="Image - Output - single service used in multiple component as per logic and requirement" title="Image - Output - single service used in multiple component as per logic and requirement" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - single service used in multiple component as per logic and requirement</figcaption>
+  </figure>
+</p>
