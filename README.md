@@ -1687,7 +1687,7 @@ export class ComponentDemo16PipesfiltersComponent implements OnInit {
     - Share data - Between multiple pages/components
     - Implement application logic - Calculations, Repeatative tasks/functionalities etc.
     - External Interaction - Database connectivity
-- Services are a great and awesome way to share information among multiple classes/components, just reate a service and inject it in respective classes/components
+- Services are a great and awesome way to share information among multiple classes/components, just create a service and inject it in respective classes/components
 
 18 Dependency Injection DI
 =====================
