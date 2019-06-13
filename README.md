@@ -31,7 +31,7 @@ Topics include
 15. [Component Interaction](#15-component-interaction)
 16. [Pipes](#16-pipes)
 17. [Services](#17-services)
-18. [Dependency Injection (DI)](#18-dependency-injection-(di))
+18. [Dependency Injection (DI)](#18-dependency-injection-di)
 
 01 Angular7 Introduction
 =====================
@@ -1689,7 +1689,7 @@ export class ComponentDemo16PipesfiltersComponent implements OnInit {
     - External Interaction - Database connectivity
 - Services are a great and awesome way to share information among multiple classes/components, just reate a service and inject it in respective classes/components
 
-18 Dependency Injection (DI)
+18 Dependency Injection DI
 =====================
 - Drawback of code without Dependency Injection (DI):
     - Code is not flexible
