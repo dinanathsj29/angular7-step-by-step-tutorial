@@ -34,7 +34,7 @@ Topics include
 18. [Dependency Injection (DI)](#18-dependency-injection-di)
 19. [Using a Service](#19-using-a-service)
 20. [HTTP and Observables](#20-http-and-observables)
-21. [Fetch Data Using HTTP & Observables](#21-fetch-data-using-http-&-observables)
+21. [Fetch Data Using HTTP and Observables](#21-fetch-data-using-http-and-observables)
 
 01 Angular7 Introduction
 =====================
@@ -1879,7 +1879,7 @@ The response/results/returns which we get from the HTTP call is nothing but an O
 - External library to work with Observables 
 - No-where related to ReactJS library from Facebook
 
-21 Fetch Data Using HTTP & Observables
+21 Fetch Data Using HTTP and Observables
 =====================
 - Http & HttpClientModule:
 - Till Angular 4 - Http module used
