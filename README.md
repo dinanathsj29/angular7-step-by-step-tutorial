@@ -160,6 +160,8 @@ In this section, we will learn how to set up a local development environment to 
 
 03 Angular First Hello World App
 =====================
+3.1. Creating new Angular App
+---------------------
 - If using Visual Studio Code / Insiders, open Command panel/terminal from menu: View -> Terminal (shortcut key is `CTRL + BackTick` OR `COMMAND + J`)
 - To create a new app with angular CLI by using syntax: `ng new project/appName` example: command: `ng new angular6-1-demo`
 - Go inside the project/app directory, command: `cd angular6-1-demo OR cd appName`
@@ -167,7 +169,16 @@ In this section, we will learn how to set up a local development environment to 
 - To change port from 4200 to other port - type command:  `ng serve --port 5000`
 - To check the application in browser type path/url: `localhost:4200 / 5000`
 
-3.1. Angular application Architecture summary:
+3.2. Working with existing/cloned/copied Angular App
+---------------------
+- Clone or Download the project/app from Github or any other sources
+- If using Visual Studio Code / Insiders, open Command panel/terminal from menu: View -> Terminal (shortcut key is `CTRL + BackTick` OR `COMMAND + J`)
+- Go inside the project/app directory, command: `cd angular6-1-demo OR cd appName`
+- To Build and run Angular App, command: `ng serve / npm start` OR `ng serve -o` OR `ng serve --open`
+- To change port from 4200 to other port - type command:  `ng serve --port 5000`
+- To check the application in browser type path/url: `localhost:4200 / 5000`
+
+3.3. Angular application Architecture summary:
 ---------------------
 - `Angular app`: (Show graphical representation of `src -> app -> components` folder)
     - Angular apps are modular in nature 
@@ -191,7 +202,7 @@ In this section, we will learn how to set up a local development environment to 
 
 Modules interact and ultimately render Components+Services view in the browser.
 
-3.2. Angular application File / Folder Architecture summary:
+3.4. Angular application File / Folder Architecture summary:
 ---------------------
 - `package.json`: consists of Node/NPM library/package/module dependencies for application development
 - `node_modues` - folder consists of all installed packages
