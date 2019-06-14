@@ -36,7 +36,7 @@ Topics include
 20. [HTTP and Observables](#20-http-and-observables)
 21. [Fetch Data Using HTTP and Observables](#21-fetch-data-using-http-and-observables)
 22. [Creating Custom Directives](#22-creating-custom-directives)
-23. [Custom Directives with Events and @HostListener](#23-custom-directives-with-events-and-@hostlistener)
+23. [Custom Directives with Events and @HostListener](#23-custom-directives-with-events-and-@HostListener)
 
 01 Angular7 Introduction
 =====================
