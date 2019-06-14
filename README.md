@@ -37,6 +37,7 @@ Topics include
 21. [Fetch Data Using HTTP and Observables](#21-fetch-data-using-http-and-observables)
 22. [Creating Custom Directives](#22-creating-custom-directives)
 23. [Custom Directives with Events and @HostListener](#23-custom-directives-with-events-and-HostListener)
+24. [Creating Custom Pipes](#24-creating-custom-pipes)
 
 01 Angular7 Introduction
 =====================
@@ -2075,7 +2076,7 @@ export class ComponentDemo211HttpemployeelistComponent implements OnInit {
 22 Creating Custom Directives
 =====================
 - We know that Directives are an `instructions in the DOM`, they specify how to place your components and business logic in the Angular
-- There are many inbuilt structural directives like `ngIf` `ngSwitch` and `ngFor` used widely in angular
+- There are many inbuilt structural directives like `ngIf`, `ngSwitch` and `ngFor` used widely in angular
 - We can also create custom directives to implement some common logic/functionality (not existing) as a class `declared as @directive` 
 
 Let's create a custom attribute directive to highlight text with blue color & italic style
@@ -2242,5 +2243,69 @@ export class HighlightCilckDirective {
   <figure>
     &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/23.1.custom-directives-events-@hostlistener.png" alt="Image - Output - custom-directives events @hostlistener" title="Image - Output - custom-directives events @hostlistener" width="1000" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - custom-directives events @hostlistener</figcaption>
+  </figure>
+</p>
+
+24 Creating Custom Pipes
+=====================
+- We learnt that Pipes (Filters) helps to `transform data before displaying to view`, `format the data`
+- There are many inbuilt pipes like `uppercase`, `number`, `currency` and `date` used widely in angular to transform data
+- We can also create custom pipes as per our requirements with `Pipe, PipeTransform class & transform method`
+
+Let's create a custom pipe to get the square root of the given number
+---------------------
+1. Inside `app/pipes` folder create a new .ts file named `squareRootPipe.ts`
+2. In `squareRootPipe.ts` to create a custom pipe we need to import `Pipe, PipeTransform class from @angular/core and also use transform method`
+3. Also in the `@Pipe directive` we have to give the name to the current pipe, which will be used in the .html file, like `name: 'squareRootPipe'`
+4. In `app.module.ts` file import and add in declarations `squareRootPipe.ts` as it's created manually
+
+> **Syntax & Example**: squareRootPipe.ts
+```ts
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'squareRootPipe'
+})
+
+export class SquareRootPipe implements PipeTransform {
+  transform(curValue: number): number {
+    return Math.sqrt(curValue);
+  }
+
+}
+```
+
+> **Syntax & Example**: app.module.ts
+```ts
+// 24. pipes - import custom created pipes
+import { SquareRootPipe } from './pipes/squareRootPipe';
+
+declarations: [
+    SquareRootPipe
+],
+```
+
+> **Syntax & Example**: app.component.html
+```html
+<!-- custom pipe  -->
+<h1> 24 Lets learn custom pipe to format/transform data </h1>
+
+<ul>
+    <li>Square Root of 81 is: {{ 81 | squareRootPipe }}</li>
+    <li>Square Root of 100 is: {{ 100 | squareRootPipe }}</li>
+</ul>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/24.1.custom-pipes-folder-structure.png" alt="Image - Output - custom-pipes-filters folder structure" title="Image - Output - custom-pipes-filters folder structure" width="500" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - custom-pipes-filters folder structure</figcaption>
+  </figure>
+</p>
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/24.2.custom-pipes.png" alt="Image - Output - custom-pipes, filters with pipe & pipeTransform" title="Image - Output - custom-pipes, filters with pipe & pipeTransform" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - custom-pipes, filters with pipe & pipeTransform</figcaption>
   </figure>
 </p>
