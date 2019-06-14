@@ -36,6 +36,7 @@ Topics include
 20. [HTTP and Observables](#20-http-and-observables)
 21. [Fetch Data Using HTTP and Observables](#21-fetch-data-using-http-and-observables)
 22. [Creating Custom Directives](#22-creating-custom-directives)
+23. [Custom Directives with Events and @HostListener](#23-custom-directives-with-events-and-@hostlistener)
 
 01 Angular7 Introduction
 =====================
@@ -2156,5 +2157,90 @@ export class BlueHighlightDirective {
   <figure>
     &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/22.3.custom-directives-elementref-nativelement-styles.png" alt="Image - Output - custom-directives elementref nativelement style" title="Image - Output - custom-directives elementref nativelement style" width="1000" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - custom-directives elementref nativelement style</figcaption>
+  </figure>
+</p>
+
+23 Custom Directives with Events and @HostListener
+=====================
+- In Angular, the `@HostListener() function decorator` allows you to handle events of the host element in the directive class
+- `@HostListener Decorator` declares a DOM event to listen for, and provides a handler method to run when that event occurs
+- Basic syntax of @Hostlistener is:
+    - `@Hostlistener('eventName',[args])` OR `@Hostlistener('target:EVENT',[args])`
+    - **eventName**: The CSS event to listen for
+    - **args**: A set of arguments to pass to the handler method when the event occurs
+
+Let's create a custom attribute directive to highlight text and also have a click event
+---------------------
+1. The command to create directive: `ng generate directive name` OR `ng g directive name`.
+    1. In the current app, we want to create all custom directives under `directives` folder so use command as: `ng generate directive directives/highlightClick`
+    2. The above command will generate and update the following:
+```
+    CREATE src/app/directives/highlight-cilck.directive.spec.ts (257 bytes)
+    CREATE src/app/directives/highlight-cilck.directive.ts (157 bytes)
+    UPDATE src/app/app.module.ts (4855 bytes)
+```
+> **Syntax & Example**: app.module.ts will be updated automatically with new directive entry
+```ts
+/// 23. directives - import custom created directives
+import { HighlightCilckDirective } from './directives/highlight-cilck.directive';
+
+declarations: [
+    HighlightCilckDirective
+],
+```
+
+2. Once directive created, in `highlight-cilck.directive.ts` assign/change selector name from `appHighlightCilck` to `"highlightCilck"` or so. 
+    1. Open any component html file and use `"highlightCilck"` directive as a attribute (i am trying in app.component.html):  `<h1 highlightCilck> Hello World! I am custom directive with Click</h1>`
+    2. To target, get or capture the current html element we can import and use `ElementRef` and `nativeElement` with `@HostListener` utilities
+
+> **Syntax & Example**: blue-highlight.directive.ts
+```ts
+import { Directive, ElementRef, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[highlightCilck]'
+})
+export class HighlightCilckDirective {
+
+  constructor(private elem: ElementRef) {
+    console.log('current Element:', elem);
+    // elem.nativeElement.innerText= 'Dynamic text innerHTML';
+    elem.nativeElement.style.color = `#ff0000`;
+    elem.nativeElement.style.backgroundColor = '#ffd5d5';
+    elem.nativeElement.style.cursor = 'pointer';
+  }
+
+  // element click event - @Hostlistener('eventName',[args])
+  @HostListener('click') showAlert() {
+    window.alert('Custom Directive - @HostListener events!');
+  }
+
+  // use global objects like document/window click - @Hostlistener('target:EVENT',[args])
+  // @HostListener('document:click', ['$event'])
+  // showElementClicked(elem) {
+  //   window.alert('Document Clicked');
+  // }
+}
+```
+
+> **Syntax & Example**: app.component.html
+```html
+<!-- custom directive with @HostListener -->
+  <h1> 23 Hello World! Lets learn custom directive with click </h1>
+
+  <li highlightCilck> I am custom directive </li>
+
+  <p>The command to create directive: <span highlightCilck>`ng generate directive highlightCilck`</span> OR <span highlightCilck>`ng g directive highlightCilck`</span>. In current app we want to create all custom directives under `directives` folder so use command as: <span highlightCilck>`ng generate directive directives/highlightCilck`</span>. Above command will Genreate and Update following: <br/>
+  <br/>
+    <span highlightCilck>CREATE</span> src/app/directives/blue-highlight.directive.spec.ts (253 bytes) <br/>
+    <span highlightCilck>CREATE</span> src/app/directives/blue-highlight.directive.ts (155 bytes) <br/>
+    <span highlightCilck>UPDATE</span> src/app/app.module.ts (4690 bytes) <br/>
+  </p>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/23.1.custom-directives-events-@hostlistener.png" alt="Image - Output - custom-directives events @hostlistener" title="Image - Output - custom-directives events @hostlistener" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - custom-directives events @hostlistener</figcaption>
   </figure>
 </p>
