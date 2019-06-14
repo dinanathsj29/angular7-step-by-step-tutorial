@@ -35,6 +35,7 @@ Topics include
 19. [Using a Service](#19-using-a-service)
 20. [HTTP and Observables](#20-http-and-observables)
 21. [Fetch Data Using HTTP and Observables](#21-fetch-data-using-http-and-observables)
+22. [Creating Custom Directives](#22-creating-custom-directives)
 
 01 Angular7 Introduction
 =====================
@@ -2067,5 +2068,93 @@ export class ComponentDemo211HttpemployeelistComponent implements OnInit {
   <figure>
     &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/21.http-observables-2.png" alt="Image - Output - http-observables" title="Image - Output - http-observables" width="1000" border="2" />
     <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - http-observables</figcaption>
+  </figure>
+</p>
+
+22 Creating Custom Directives
+=====================
+- We know that Directives are an `instructions in the DOM`, they specify how to place your components and business logic in the Angular
+- There are many inbuilt structural directives like `ngIf` `ngSwitch` and `ngFor` used widely in angular
+- We can also create custom directives to implement some common logic/functionality (not existing) as a class `declared as @directive` 
+
+Let's create a custom attribute directive to highlight text with blue color & italic style
+---------------------
+1. The command to create directive: `ng generate directive name` OR `ng g directive name`.
+    1. In the current app, we want to create all custom directives under `directives` folder so use command as: `ng generate directive directives/blueHighlight`
+    2. The above command will generate and update the following:
+```
+    CREATE src/app/directives/blue-highlight.directive.spec.ts (253 bytes)
+    CREATE src/app/directives/blue-highlight.directive.ts (155 bytes)
+    UPDATE src/app/app.module.ts (4690 bytes)
+```
+> **Syntax & Example**: app.module.ts will be updated automatically with new directive entry
+```ts
+// 22. directives - import custom created directives
+import { BlueHighlightDirective } from './directives/blue-highlight.directive';
+
+declarations: [
+    BlueHighlightDirective
+],
+```
+
+2. Once directive created, in `blue-highlight.directive.ts` assign/change selector name from `appBlueHighlight` to `"blueHighlight"` or so. 
+    1. Open any component html file and use `"blueHighlight"` directive as a attribute (i am trying in app.component.html):  `<h1 blueHighlight> Hello World! I am custom directive </h1>`
+    2. To target, get or capture the current html element we can import and use `ElementRef` and `nativeElement` utilities
+
+3. Directives called before the element is rendered so it's advisable to perform all content related actions inside `ngOnInit()` life cycle hook
+
+> **Syntax & Example**: blue-highlight.directive.ts
+```ts
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[blueHighlight]'
+})
+export class BlueHighlightDirective {
+
+  constructor(private elem:ElementRef) { 
+    console.log('current Element:', elem);
+    // elem.nativeElement.innerText= 'Dynamic text innerHTML';
+    elem.nativeElement.style.color = `#0000ff`;
+    elem.nativeElement.style.fontStyle = 'italic';
+    elem.nativeElement.style.backgroundColor   = '#c7c7ff';
+  }
+
+}
+```
+
+> **Syntax & Example**: app.component.html
+```html
+<!-- custom directive  -->
+<h1> 22 Hello World! Lets learn custom directive </h1>
+
+<li blueHighlight> I am custom directive </li>
+
+<p>The command to create directive: <span blueHighlight>`ng generate directive blueHighlight`</span> OR <span blueHighlight>`ng g directive blueHighlight`</span>. In current app we want to create all custom directives under `directives` folder so use command as: <span blueHighlight>`ng generate directive directives/blueHighlight`</span>. Above command will Genreate and Update following: <br/>
+<br/>
+<span blueHighlight>CREATE</span> src/app/directives/blue-highlight.directive.spec.ts (253 bytes) <br/>
+<span blueHighlight>CREATE</span> src/app/directives/blue-highlight.directive.ts (155 bytes) <br/>
+<span blueHighlight>UPDATE</span> src/app/app.module.ts (4690 bytes) <br/>
+</p>
+```
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/22.1.custom-directives-folder-structure.png" alt="Image - Output - custom-directives folder structure" title="Image - Output - custom-directives folder structure" width="500" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - custom-directives folder structure</figcaption>
+  </figure>
+</p>
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/22.2.custom-directives-elementref-nativelement.png" alt="Image - Output - custom-directives elementref nativelement" title="Image - Output - custom-directives elementref nativelement" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - custom-directives elementref nativelement</figcaption>
+  </figure>
+</p>
+
+<p>
+  <figure>
+    &nbsp;&nbsp;&nbsp; <img src="./_images_angular7/22.3.custom-directives-elementref-nativelement-styles.png" alt="Image - Output - custom-directives elementref nativelement style" title="Image - Output - custom-directives elementref nativelement style" width="1000" border="2" />
+    <figcaption>&nbsp;&nbsp;&nbsp; Image - Output - custom-directives elementref nativelement style</figcaption>
   </figure>
 </p>
