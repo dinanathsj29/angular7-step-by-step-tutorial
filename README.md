@@ -1879,7 +1879,7 @@ The response/results/returns which we get from the HTTP call is nothing but an O
 - External library to work with Observables 
 - No-where related to ReactJS library from Facebook
 
-21 Fetch Data Using HTTP
+21 Fetch Data Using HTTP & Observables
 =====================
 - Http & HttpClientModule:
 - Till Angular 4 - Http module used
