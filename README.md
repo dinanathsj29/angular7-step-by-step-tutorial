@@ -2259,6 +2259,11 @@ Let's create a custom pipe to get the square root of the given number
 3. Also in the `@Pipe directive` we have to give the name to the current pipe, which will be used in the .html file, like `name: 'squareRootPipe'`
 4. In `app.module.ts` file import and add in declarations `squareRootPipe.ts` as it's created manually
 
+* To create a pipe using angular CLI:
+    - `syntax`: ng generate pipe pipeName OR ng generate pipe path/pipeName
+    - `command`: ng generate pipe pipes/reversText
+* The above command will generate pipe `reversTextPipe.ts` with `@Pipe` decorator, implements `PipeTransform` and also update the src/app/app.module.ts with necessary imports entries
+
 > **Syntax & Example**: squareRootPipe.ts
 ```ts
 import { Pipe, PipeTransform } from '@angular/core';
