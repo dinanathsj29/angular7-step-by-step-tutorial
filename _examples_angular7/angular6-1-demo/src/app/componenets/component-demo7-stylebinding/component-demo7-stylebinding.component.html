@@ -1,0 +1,14 @@
+<div>
+  <h1>component-demo7-stylebinding works!</h1>
+
+  <h3 ngNonBindable> &lt;tag [style.color]="'orange'"&gt; text &lt;/tag&gt;</h3>
+  <h4 [style.color]="'orange'">applying inline styles</h4>
+
+  <h3 ngNonBindable> &lt;tag [style.color]="'varName'"&gt; text &lt;/tag&gt;</h3>
+  <h4 [style.color]="greenColor">applying inline styles with variable </h4>
+
+  <h3 ngNonBindable> &lt;style.color]="hasError ? 'red' : 'green' "&gt; text &lt;/tag&gt;</h3>
+  <h4 [style.color]="hasError ? 'red' : 'green' ">applying inline styles with variable conditions</h4>
+
+  <h4 [ngStyle]="headerStyles">applying multiple inline styles</h4>
+</div>

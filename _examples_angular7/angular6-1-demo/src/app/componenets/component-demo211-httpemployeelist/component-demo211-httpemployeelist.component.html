@@ -1,0 +1,28 @@
+<div>
+  <h1>component-demo211-httpemployeelist works!</h1>
+
+  <h2>HTTP Services and Observables</h2>
+  
+  <ul>
+    <strong>Http & HttpClientModule:</strong>
+    <li>Till Angular 4 - Http module used</li>
+    <li>In Angular 5 - HttpClientModule used (HttpClientModule provides simplified APIs to work with http functionality)</li>
+    <li>We know an Observables are return as result of a http call, to handle an exceptions on observables we make a use of 'catch' operator</li>
+  </ul>
+
+  <ul>
+    <strong>4 steps to fetch data from http & observables:</strong>
+    <li>HTTP Get request from service</li>
+    <li>Receive the observable and cast it into an array/Object</li>
+    <li>Subscribe to the observable from List and Details component class</li>
+    <li>Assign the received array/Object to local variable</li>
+  </ul>
+
+  <h2>Employee HTTP Observables list:</h2>
+  <ul>
+    <li *ngFor="let employee of employees">
+      {{employee.id}} {{employee.name}}
+    </li>
+  </ul>
+
+</div>

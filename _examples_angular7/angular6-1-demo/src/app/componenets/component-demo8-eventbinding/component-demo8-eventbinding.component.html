@@ -1,0 +1,22 @@
+<div>
+  <h1>component-demo8-eventbinding works!</h1>
+
+  <h2>Event Binding</h2>
+  
+  <ul>
+    <li>Event binding captures any DOM event and performs actions</li>
+    <li>Angular provides an ability to bind the events along with the methods, Event binding is used with `parenthesis ()`</li>
+    <li>Usually data binding done from Component Class `.ts` to Component Template `.html` (variables in class .ts files used/bind with html/template .html)</li>
+    <li>To responds to user events like mouse clicks or keyboard events we need data flow from TEMPLATE to CLASS, event binding flows from TEMPLATE to CLASS (.HTML/TEMPLATE/VIEW to .TS/CLASS file)</li>
+    <li>Syntax: `h1 (click)="fn()">Click Me - Change Style /h1>`</li>
+  </ul>
+
+  <h1 (click)="fn_changeStyles()" [class.text-primary]="isButtonClicked" style="cursor:pointer;">Click Me - Change Style</h1>
+
+  <div>isButtonClicked: {{isButtonClicked}}.  | {{isButtonClicked ? greetingMessage : " "}} </div> <br /><br />
+
+  <button (click)="fn_checkClick($event)">Click me!</button> Event: {{eventType}} 
+
+  <button (click)="withoutHandlerMessage = 'Without handler function' ">Without handler function - Click me!</button> {{withoutHandlerMessage}}
+
+</div>

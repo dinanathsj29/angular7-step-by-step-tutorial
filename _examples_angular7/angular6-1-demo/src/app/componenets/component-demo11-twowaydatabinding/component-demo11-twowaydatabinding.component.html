@@ -1,0 +1,19 @@
+<div>
+  <h1>component-demo11-twowaydatabinding works!</h1>
+
+  <h2>Two way data binding</h2>
+
+  <ul>
+    <li>Two Way Data Binding helps to update the property at the same time displays the value of the property</li>
+    <li>In two way data binding, `automatic synchronization of data happens between the Model and the View`</li>
+    <li>Here whenever we make changes in the Model(data/variable) it will be reflect in the View and when you make changes in View(html/template) it will be reflect in Model</li>
+    <li>`"ngModel"` Directive is used to implement Two Way Data Binding (basically VIEW & MODEL should always be sync)</li>
+    <li>`[ ] square bracket / property binding` is used for data flow from class to template and `( ) parentheses / event binding` for data from template to class </li>
+    <li>`[(ngModel)]` - this syntax is known as `[(banana in the box)]`</li>
+    <li>To use `[(ngModel)]` Directive we must need to `import FormsModule` from `@angular/forms` and also add to imports array in app.module.ts: `import {{ FormsModule }} from '@angular/forms';`</li>
+    <li>**Note**: In two way data binding value flow from Input Text field to class file and than to view/template file</li>
+  </ul>
+  
+  <input type="text" [(ngModel)]="nameText" placeholder="Enter Name"/> {{nameText}}
+  
+</div>

@@ -1,0 +1,21 @@
+<div>
+  <h1>component-demo10-onewaydatabinding works!</h1>
+
+  <h2>One way data binding</h2>
+
+  <ul>
+    <li>One way data binding is a simple/normal one way communication where HTML template is changed when any changes to TypeScript code/model/data/variable</li>
+    <li>In one way data binding value of Model is used in the View (HTML) but we can't update Model from the View (.HTML Template)</li>
+    <li>Example:  Interpolation / String Interpolation, Property Binding, and Event Binding</li>
+    <li>One way data binding works from class .ts file to template/view .html file:</li>
+  </ul>
+
+  <input type="text" value={{inputResultValue}} /> <br />
+  <input type="text" [value]=inputResultValue /> <br />
+  <input type="text" bind-value=inputResultValue /> <br />
+
+  <h2>One Way Data Binding works as Two way (work around)</h2>
+  <input type="text" placeholder="Enter Name" [value]="userNameText" (input)="changeInputText($event)" /> &nbsp;&nbsp;
+  <span><em><strong>{{userNameText}}</strong></em></span>
+  
+</div>

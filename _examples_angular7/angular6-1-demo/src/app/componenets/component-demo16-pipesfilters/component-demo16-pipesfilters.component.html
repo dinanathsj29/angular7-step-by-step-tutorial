@@ -1,0 +1,53 @@
+<div>
+  <h1>component-demo16-pipesfilters works!</h1>
+
+  <h2>pipes</h2>
+  <ul>
+    <li>Pipes (Filters) helps to `transform data before displaying to view`</li>
+    <li>Pipes (Filters) can be added in AngularJS to format data</li>
+    <li>Pipes (Filters) is denoted by `piping |` symbol</li>
+    <li>There are many built-in/default pipes available in angular like: `String related pipes` (uppercase, lowercase), `Number related pipes` (number), `Currency` pipes, `Date` pipes, `JSON` pipes. </li>
+    <li>We can also create custom pipes as per out requirements with `Pipe, PipeTransform class & transform method`</li>
+  </ul>
+
+  <h2>String based Pipes : Format string</h2>
+  uppercase: {{ nameText | uppercase }} <br />
+  lowercase: {{ messageText | lowercase }} <br />
+  titlecase: {{ greetingText | titlecase }} <br />
+
+  slice:start:end (not including that letter): {{ greetingText | slice:8}} <br />
+  <!-- slice:starting point:limit/up to (not including that letter) -->
+  slice:start:end (not including that letter): {{ greetingText | slice:14:15}} <br />
+
+  <h2>JSON Pipes - Shows json representation of an object</h2>
+  json: {{ objTechnology | json }} <br />
+
+  <h2>Number Pipes - Format Number, Integers</h2>
+  <!-- min integer digit. min decimal digit - max decimal digit. -->
+  number (min integer digit. min decimal digit - max decimal digit): {{ 5.29898 | number:"1.2-3" }} <br />
+  number (min integer digit. min decimal digit - max decimal digit): {{ 5.29898 | number:"2.2-2" }} <br />
+
+  percent: {{ 0.29898 | percent }} <br />
+
+  <h2>Currency Pipes - Transform Currency values</h2>
+  currency: {{ 0.29898 | currency }}<br />
+  currency: {{ 0.29898 | currency:'Rs.' }} <br />
+  currency: {{ 0.29898 | currency:'GBP' }} <br />
+  currency: {{ 0.29898 | currency:'GBP':'code' }} <br />
+
+  <h2>Date Pipes - Transform Date</h2>
+  Date: {{ currentDate }}<br />
+
+  date:short: {{ currentDate | date:'short' }}<br />
+  date:shortDate: {{ currentDate | date:'shortDate' }}<br />
+  date:shortTime: {{ currentDate | date:'shortTime' }} <br /> <br />
+
+  date:medium: {{ currentDate | date:'medium' }}<br />
+  date:mediumDate: {{ currentDate | date:'mediumDate' }}<br />
+  date:mediumTime: {{ currentDate | date:'mediumTime' }}<br /> <br />
+
+  date:long: {{ currentDate | date:'long' }}<br />
+  date:longDate: {{ currentDate | date:'longDate' }}<br />
+  date:longTime: {{ currentDate | date:'longTime' }}<br />
+
+</div>

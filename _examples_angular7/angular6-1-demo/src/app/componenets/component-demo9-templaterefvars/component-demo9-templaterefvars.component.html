@@ -1,0 +1,20 @@
+<div>
+  <h1>component-demo9-templaterefvars works!</h1>
+
+  <h2>Template Reference Variables</h2>
+  
+  <ul>
+    <li>When there is a user interaction we may want some data to flow from VIEW/TEMPLATE (.HTML) to the class .TS) to perform some operation </li>
+    <li>Example: value from input fields to perform some validation etc.</li>
+    <li>To easily access DOM elements and their properties, Template Reference Variables is used</li>
+    <li>Template Reference Variables is created with #hash symbol followed by var name i.e. `#heading1`</li>
+    <li>Syntax: `h1 #heading1>I am heading 1 /h1>`, here `#heading1` is Template Reference Variable (a dynamic name/id) assigned to h1 tag</li>
+  </ul>
+
+  <input #textInput type="text" placeholder="Enter Name" /> &nbsp; &nbsp;
+
+  <button (click)="logDetails(textInput)">Get Input Field</button> &nbsp; &nbsp;
+
+  <button (click)="logDetails(textInput.value)">Get Value of field </button> &nbsp; &nbsp;
+
+</div>

@@ -1,0 +1,28 @@
+<div>
+  <h1>component-demo13-ngswitch works!</h1>
+
+  <ul>
+    <li>Directives are js class and `declared as @directive` </li>
+    <li>There are 3 main types of directives in Angular: </li>
+    <li>**Component Directives** - Component directives are used in `main class (app.component.ts)`. They contain the detail of how the component should be processed, instantiated and used at runtime </li>
+    <li>**Structural Directives** - Structural Directives let us `Add or Remove (Show or Hide) HTML elements` from DOM. Structural directives `start with a * sign`. These directives are used to `manipulate and change the structure of the DOM elements`. For example, *ngIf and *ngFor etc. </li>
+    <li>**Attribute Directives** - Attribute directives `look like a normal HTML Attribute` and mainly used in `databinding and event binding`. Attribute directives are used to `change the look and behavior of the DOM elements`. Attribute Directives affect only the element they are added to. For example: ngClass, ngStyle etc.  </li>
+    <li>Most important/widely used inbuilt Structural directives are:  </li>
+    <li>**ngIf** - conditionally render/show-hide html elements  </li>
+    <li>**ngSwitch** - conditionally render/show-hide html elements  </li>
+    <li>**ngFor** - render/show list of html elements through loop </li>
+  </ul>
+
+  <h2>*ngSwtich</h2>
+  <ul>
+    <li>ngSwitch directive is similar to other programming languages swtich statement, only the `difference is with angular we render HTML elements instead of executing logics`</li>
+  </ul>
+
+  <div [ngSwitch]="curColor">
+    <div *ngSwitchCase="'red'" [style.color]="curColor">RED | {{curColor}} | color</div>
+    <div *ngSwitchCase="'green'" [style.color]="curColor">GREEN | {{curColor}} | color</div>
+    <div *ngSwitchCase="'blue'" [style.color]="curColor">BLUE | {{curColor}} | color</div>
+    <div *ngSwitchDefault>Default BLACK</div>
+  </div>
+
+</div>

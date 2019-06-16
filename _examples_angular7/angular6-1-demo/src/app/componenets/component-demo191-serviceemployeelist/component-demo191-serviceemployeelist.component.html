@@ -1,0 +1,26 @@
+<div>
+  <h1>component-demo191-serviceemployeelist works!</h1>
+
+  <h2>Services</h2>
+  Services are a great and awesome way to share information among multiple classes/components, just create a service and inject it in respective classes/components. Service is a class with a specific purpose and widely used to:
+  <ul>
+    <li>Share data - Between multiple pages/components</li>
+    <li>Implement application logic - Calculations, Repeatative tasks/functionalities etc.</li>
+    <li>External Interaction - Database connectivity</li>
+  </ul>
+
+  3 steps involved to create and use service in angular:
+  <ul>
+    <li>Define the Service class </li>
+    <li>Register with Injector</li>
+    <li>Declare as a dependency in List and Details both component</li>
+  </ul>
+
+  <h2>Employee list:</h2>
+  <ul>
+    <li *ngFor="let employee of employees">
+      {{employee.id}} {{employee.name}}
+    </li>
+  </ul>
+
+</div>

@@ -1,0 +1,28 @@
+<div>
+  <h1>component-demo5-propertybinding works!</h1>
+
+  <h3>attributes vs value</h3>
+  <input size="40" type="text" value="angular property binding" />
+
+  <h3 ngNonBindable>property binding [ ] vs interpolation {{ ngNonBindable }} </h3>
+
+  <input type="text" [id]="_id" value="[ ] property-binding" /><br />
+  <input type="text" id="{{_id}}" value="{ } interpolation property-binding" /> <br /> <br />
+
+  <h3>attribute boolean (property) interpolation does not support </h3>
+  <input type="text" disabled="false" [id]="_id" value="boolean false not works" /><br />
+  <input type="text" disabled="true" [id]="_id" value="boolean true not works" /> <br /> <br />
+
+  <h3>property binding boolean values supported  </h3>
+  <input type="text" [disabled]="false" [id]="_id" value="[property-binding] works" /><br />
+  <input type="text" [disabled]="true" [id]="_id" value="[property-binding] works" /><br /> <br />
+
+  <h3>property binding boolean property with variable </h3>
+  <input type="text" [disabled]="_isDisabled1" [id]="_id" value="[ var ] disabled works" /><br />
+  <input type="text" [disabled]="_isDisabled2" [id]="_id" value="[ var ] enabled works" /><br />
+
+  <h3>property binding with bind- </h3>
+  <input type="text" bind-disabled="_isDisabled1" [id]="_id" value="[ var ] disabled works" /><br />
+  <input type="text" bind-disabled="_isDisabled2" [id]="_id" value="[ var ] enabled works" /><br />
+
+</div>

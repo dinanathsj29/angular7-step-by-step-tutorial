@@ -1,0 +1,58 @@
+<div>
+  <h1>component-demo12-ngif works!</h1>
+
+  <ul>
+    <li>Directives are js class and `declared as @directive` </li>
+    <li>There are 3 main types of directives in Angular: </li>
+    <li>**Component Directives** - Component directives are used in `main class (app.component.ts)`. They contain the detail of how the component should be processed, instantiated and used at runtime </li>
+    <li>**Structural Directives** - Structural Directives let us `Add or Remove (Show or Hide) HTML elements` from DOM. Structural directives `start with a * sign`. These directives are used to `manipulate and change the structure of the DOM elements`. For example, *ngIf and *ngFor etc. </li>
+    <li>**Attribute Directives** - Attribute directives `look like a normal HTML Attribute` and mainly used in `databinding and event binding`. Attribute directives are used to `change the look and behavior of the DOM elements`. Attribute Directives affect only the element they are added to. For example: ngClass, ngStyle etc.  </li>
+    <li>Most important/widely used inbuilt Structural directives are:  </li>
+    <li>**ngIf** - conditionally render/show-hide html elements  </li>
+    <li>**ngSwitch** - conditionally render/show-hide html elements  </li>
+    <li>**ngFor** - render/show list of html elements through loop </li>
+  </ul>
+
+  <h2>*ngIf</h2>
+  <ul>
+    <li>*ngIf directive is used to change the output conditionally </li>
+    <li>If condition is false, DOM element does not renders </li>
+    <li>With *ngIf use truthy or falsy value which conditionally renders the DOM elements </li>
+    <li>`ng-template` is like a container for chunks/group of HTML elements controlled once </li>
+  </ul>
+  
+  <h2>*ngIf - simple Add/Remove elements conditionally</h2>
+
+  <ul>
+    <li *ngIf="true">Show me </li>
+    <li *ngIf="false">I am NOT rendered in DOM </li>
+    <li *ngIf="isShow">Please show me - conditional variable/property from class</li>
+  </ul>
+
+  <h2>ngIf else ng-template</h2>
+  If condition is false, different DOM element renders as specified in "ng-template else">
+
+  <!-- variable true - show me, else show other ng-template -->
+  <div *ngIf="hasDisplay; else elseTemplate">
+    <h5>I have used in ngIf TRUE part</h5>
+  </div>
+
+  <ng-template #elseTemplate>
+    <h5>I am using ngIf FALSE/ELSE part in ng-template</h5>
+  </ng-template>
+
+  <h2>ngIf - ng-template else ng-template</h2>
+  depends on variable/condition show ng-template1 else show other ng-template2
+
+  <!-- variable true then show ng-template1 else show other ng-template2 -->
+  <div *ngIf="hasDisplay; then trueTemplate; else falseTemplate"></div>
+
+  <ng-template #trueTemplate>
+    <h5>I am #trueTemplate</h5>
+  </ng-template>
+
+  <ng-template #falseTemplate>
+    <h5>I am #falseTemplate</h5>
+  </ng-template>
+
+</div>

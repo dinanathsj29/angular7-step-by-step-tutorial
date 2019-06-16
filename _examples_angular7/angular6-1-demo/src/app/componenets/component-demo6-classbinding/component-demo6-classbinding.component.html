@@ -1,0 +1,20 @@
+<div>
+  <h1>component-demo6-classbinding works! </h1>
+
+  <h3 ngNonBindable>[class]="varName" (varName holds css className present in css)</h3>
+
+  <h4 class="text-orange">simple class attribute</h4>
+  
+  <h4 [class]="successClass">This is class binding with []</h4>
+
+  <h4 class="{{successClass}}">This is class binding with interpolation</h4>
+
+  <h4 [class]="successClass" class="text-orange">This is class binding with [] also class attribute</h4>
+
+  <h4 [class.text-special]="isSpecialClass">This is class binding with boolean variable condition </h4>
+
+  <h4 [class.text-danger]="isErrorClass">This is class binding with boolean variable condition </h4>
+
+  <h4 [ngClass]="messageClasses">This is ngClass binding to deal with multiple classes at once</h4>
+  
+</div>

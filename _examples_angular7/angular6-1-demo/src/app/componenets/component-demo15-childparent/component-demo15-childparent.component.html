@@ -1,0 +1,39 @@
+<div>
+  <h1>component-demo15-childparent works!</h1>
+
+  Component interact [parent to child and vice versa] with @input() & @output() decorator
+
+  <h2>@input decorator</h2>
+  <ul>
+    <li>Parent component sends data, Child component accepts with @input() decorator `(parent to child component communication with @input() decorator)`</li>
+    <li>1. Parent class/.ts file - Create a property or class member/variable, example: `parentMessage = 'From Parent';` </li>
+    <li>2. Parent view/.html file - In child selector tag use parent variable with property binding for communication, example: `app-component-demo15-childparent [parentData]="parentMessage"> /app-component-demo15-childparent>` </li>
+    <li>3. Child component class/.ts file - Receive data data/value coming from parent component, example: `@Input() public parentData;`</li>
+    <li>4. Child view/.html file - Bind / Get Parent Data in Child component example: `Hello <strong ngNonBindable>{{parentData}}</strong>`</li>
+  </ul>
+
+  <h2>@output decorator</h2>
+  <ul>
+    <li>Child component sends data/events, Parent component accepts with @output() decorator `(child to parent component communication with @output() decorator)`</li>
+    <li>To send data from Child to Parent we need events i.e. create `Events-EventEmitter`</li>
+    <li>1. Child component class/.ts file - Create child output event to send to parent by using EventEmitter class</li>
+    <li>2. Child component class/.ts file - Create child event handler function and emit some events/message</li>
+    <li>3. Child view/.html file - Create a button element to fire child event handler function</li>
+    <li>4. Parent view/.html file - In child selector tag capture child event, example: `app-component-demo15-childparent (childEvent)="messageChild=($event)">/app-component-demo15-childparent>` </li>
+    <li>5. Parent view/.html file - Bind the messageChild property in view <span>Parent component showing message from child component</span>: <strong ngNonBindable>{{messageChild}}</strong> </li>
+  </ul> <br />
+
+  <!-- parent to child -->
+
+  <u>Bind / Get Parent Data in Child component</u>:
+  Hello <strong>{{parentData}}</strong> <br /> <br /> <br />
+
+  <!-- <u>bind / Get Parent Data in Child alias based method</u>:
+  Hello <strong>{{parentName}}</strong> <br /><br /> -->
+  
+  <!-- child to parent -->
+
+  <!-- Fire child event on button click -->
+  <button (click)="childFireEvent()">Send Child Event to Parent</button>
+  
+</div>
