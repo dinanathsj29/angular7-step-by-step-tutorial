@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* common global generic styles */
+.custom-divider {
+  margin: 30px 0px;
+  border-bottom:2px dashed gray;
+}
+
+h1,h2,h3 {
+  text-transform: uppercase;
+  /* text-transform: capitalize; */
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+body {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  letter-spacing: 2px;
+}
+
+li {
+  margin: 10px 0px;
+}
+
+input{
+  padding: 5px;
+}
+
+button {
+  border-radius: 5px;
+  padding: 10px 15px;
+  background-color: teal;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: lightcyan;
+}
+
+/* class binding */
+.text-primary {
+  color: blue;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-success {
+  color: lawngreen;
+}
+
+.text-special {
+  font-weight:bold;
+  font-style: italic;
+  color:orchid;
+}
+
+.text-strikethrough {
+  text-decoration: line-through;
+}
+
+.text-orange {
+  color: orange;
+}
+
+/* */

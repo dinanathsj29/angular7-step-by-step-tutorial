@@ -1,0 +1,6 @@
+[
+  { "id": 1, "name": "Amitabh", "age": 75, "city": "Alahabad" },
+  { "id": 2, "name": "Akshay", "age": 55, "city": "Delhi" },
+  { "id": 3, "name": "RajaniKanth", "age": 73, "city": "Chennai" },
+  { "id": 4, "name": "Rajesh Khanna", "age": 85, "city": "Kolkatta" }
+]
