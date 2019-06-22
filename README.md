@@ -148,7 +148,7 @@ In this section, we will learn how to set up a local development environment to 
   </figure>
 </p>
 
-4. After installation check version of angular CLI by using the command: `ng -v` OR `ng --version`
+4. After installation check version of angular CLI by using the command: `ng -v` OR `ng --version`, you can also verify angular CLI installation by command: `ng` OR `ng --help`
 5. Create a new app with angular CLI by using syntax: `ng new project/appName` example: command: `ng new angular6-1-demo`
 6. Go inside the project/app directory, command: `cd angular6-1-demo`
 7. Build and run Angular App, command: `ng serve` OR `ng serve -o` OR `ng serve --open`
@@ -160,6 +160,7 @@ In this section, we will learn how to set up a local development environment to 
 - to get NPM version, type command: `npm -v`  OR `npm --version`
 - to install Angular CLI, type command: `npm install -g @angular/cli`
 - to get angular CLI version, type command: `ng -v` OR `ng --version` (this command displays details of a node, npm, and other angular package versions)
+- to get various angular CLI commands, type command: `ng` OR `ng --help` 
 
 03 Angular First Hello World App
 =====================
