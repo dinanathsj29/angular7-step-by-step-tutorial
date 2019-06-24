@@ -1733,7 +1733,7 @@ export class ComponentDemo16PipesfiltersComponent implements OnInit {
 
 1.Define the Service class 
 ---------------------
-1. Create service (which is responsible for providing employee data) with the command "ng g s employee" OR "ng generate service employee"
+1. Create service (which is responsible for providing employee data) with the command `"ng g s employee"` OR `"ng generate service employee"`
 
 > **Syntax & Example**: employee.service.ts
 ```ts
